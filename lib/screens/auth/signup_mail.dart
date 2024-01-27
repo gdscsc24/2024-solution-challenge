@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rest_note/screens/auth/signup_verify.dart';
+import 'package:rest_note/screens/auth/nickname.dart';
+// import 'package:rest_note/screens/auth/signup_verify.dart';
 import 'package:rest_note/widgets/submit_button.dart';
 
 class SignupMailPage extends StatelessWidget {
@@ -84,10 +85,10 @@ class SignupMailPage extends StatelessWidget {
             ),
             SubmitButton(
               onPressed: () {
-                // Navigator.pushReplacement(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => SignupVerifyPage()),
-                // );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NicknamePage()),
+                );
               },
               buttonText: 'Sign up',
             ),
