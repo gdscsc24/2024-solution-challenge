@@ -8,7 +8,7 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xFFFAF1F1),
+      backgroundColor: const Color(0xFFFAF1F1),
       body: Center(
         child: Column(
           children: [
