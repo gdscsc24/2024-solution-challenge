@@ -36,7 +36,7 @@ class _IntroSlideState extends State<IntroSlide> {
       body: Padding(
         padding: EdgeInsets.only(top: screenSize.height * 0.23),
         child: PageView.builder(
-          itemCount: icons.length * 3,
+          itemCount: icons.length,
           onPageChanged: (index) {
             setState(() {
               currentPage = index;

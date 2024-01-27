@@ -131,7 +131,7 @@ class SignupButton extends StatelessWidget {
               width: 24.0, // 이미지 크기 조절
               height: 24.0,
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Text(
               text,
               style: const TextStyle(
