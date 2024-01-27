@@ -9,7 +9,7 @@ class SignupMailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xFFFAF1F1),
+      backgroundColor: const Color(0xFFFAF1F1),
       body: Center(
         child: Column(
           children: [
@@ -24,7 +24,7 @@ class SignupMailPage extends StatelessWidget {
                 color: Color(0xFF302E2E),
               ),
             ),
-            SizedBox(height: screenSize.height * 0.083),
+            SizedBox(height: screenSize.height * 0.05),
             Padding(
               padding: EdgeInsets.only(bottom: screenSize.height * 0.016),
               child: SizedBox(
@@ -32,8 +32,37 @@ class SignupMailPage extends StatelessWidget {
                 height: screenSize.height * 0.06,
                 child: TextField(
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline),
+                    prefixIcon: const Icon(Icons.person_outline),
                     hintText: 'Email',
+                    hintStyle: const TextStyle(
+                      fontFamily: 'Comfortaa',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF333258),
+                    ),
+                    alignLabelWithHint: true,
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * 0.12),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: screenSize.height * 0.016),
+              child: SizedBox(
+                width: screenSize.width * 0.72,
+                height: screenSize.height * 0.06,
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock_outline_rounded),
+                    hintText: 'Password',
                     hintStyle: const TextStyle(
                       fontFamily: 'Comfortaa',
                       fontSize: 20,
@@ -55,10 +84,10 @@ class SignupMailPage extends StatelessWidget {
             ),
             SubmitButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignupVerifyPage()),
-                );
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => SignupVerifyPage()),
+                // );
               },
               buttonText: 'Sign up',
             ),
