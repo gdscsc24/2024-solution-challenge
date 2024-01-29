@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rest_note/screens/diary/diary_main.dart';
 import 'package:rest_note/widgets/submit_button.dart';
 
 class AuthCompletePage extends StatelessWidget {
@@ -31,10 +32,10 @@ class AuthCompletePage extends StatelessWidget {
             ),
             SubmitButton(
               onPressed: () {
-                // Navigator.pushReplacement(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => BirthdayPage()),
-                // );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => DiaryMainPage()),
+                );
               },
               buttonText: "Let's start!",
             )
