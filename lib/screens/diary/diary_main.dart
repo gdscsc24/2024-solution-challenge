@@ -62,7 +62,7 @@ class _DiaryMainPageState extends State<DiaryMainPage> {
               ),
               Image.asset(
                 'assets/images/diary_main_cafe.png',
-                width: screenSize.width * 0.75,
+                width: screenSize.width * 0.74,
               ),
               Ink(
                   decoration: ShapeDecoration(
