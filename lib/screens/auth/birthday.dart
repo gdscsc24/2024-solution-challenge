@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:rest_note/screens/auth/auth_complete.dart';
 import 'package:rest_note/widgets/submit_button.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class BirthdayPage extends StatefulWidget {
   @override
@@ -10,6 +13,27 @@ class BirthdayPage extends StatefulWidget {
 
 class _BirthdayPageState extends State<BirthdayPage> {
   final TextEditingController _controller = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> _saveBirthday() async {
+    String userEmail = FirebaseAuth.instance.currentUser?.email ?? '';
+    String birthdayStr = _controller.text;
+
+    try {
+      DateFormat format = DateFormat('yyyy/MM/dd');
+      DateTime birthday = format.parseStrict(birthdayStr);
+
+      Timestamp birthdayTimestamp = Timestamp.fromDate(birthday);
+
+      await _firestore.collection('users').doc(userEmail).set({
+        'birthday': birthdayTimestamp,
+      }, SetOptions(merge: true));
+    } catch (e) {
+      // 날짜 파싱 오류 처리
+      print('Error parsing date: $e');
+      // 필요에 따라 사용자에게 오류 메시지를 표시하세요.
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +101,8 @@ class _BirthdayPageState extends State<BirthdayPage> {
             ),
             SizedBox(height: screenSize.height * 0.07),
             SubmitButton(
-              onPressed: () {
+              onPressed: () async {
+                await _saveBirthday();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
