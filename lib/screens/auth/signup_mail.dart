@@ -103,8 +103,7 @@ class _SignupMailPageState extends State<SignupMailPage> {
                   );
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const NicknamePage()),
+                    MaterialPageRoute(builder: (context) => NicknamePage()),
                   );
                 } on FirebaseAuthException catch (e) {
                   // 에러 처리: 오류 메시지 표시
