@@ -38,9 +38,7 @@ class _IntroSlideState extends State<IntroSlide> {
         child: PageView.builder(
           itemCount: icons.length,
           onPageChanged: (index) {
-            setState(() {
-              currentPage = index;
-            });
+            setState(() => currentPage = index);
           },
           itemBuilder: (context, index) {
             return Column(
