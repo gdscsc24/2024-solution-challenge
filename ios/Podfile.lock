@@ -1,5 +1,4 @@
 PODS:
-<<<<<<< HEAD
   - abseil/algorithm (1.20220623.0):
     - abseil/algorithm/algorithm (= 1.20220623.0)
     - abseil/algorithm/container (= 1.20220623.0)
@@ -640,19 +639,14 @@ PODS:
     - firebase_core
     - Flutter
     - nanopb (< 2.30910.0, >= 2.30908.0)
-=======
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
   - Firebase/Auth (10.18.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 10.18.0)
   - Firebase/CoreOnly (10.18.0):
     - FirebaseCore (= 10.18.0)
-<<<<<<< HEAD
   - Firebase/Firestore (10.18.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.18.0)
-=======
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
   - firebase_auth (4.16.0):
     - Firebase/Auth (= 10.18.0)
     - firebase_core
@@ -672,7 +666,6 @@ PODS:
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
     - GoogleUtilities/Logger (~> 7.12)
-<<<<<<< HEAD
   - FirebaseCoreExtension (10.20.0):
     - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.20.0):
@@ -697,10 +690,6 @@ PODS:
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseSharedSwift (10.20.0)
-=======
-  - FirebaseCoreInternal (10.19.0):
-    - "GoogleUtilities/NSData+zlib (~> 7.8)"
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
   - Flutter (1.0.0)
   - GoogleUtilities/AppDelegateSwizzler (7.12.0):
     - GoogleUtilities/Environment
@@ -717,7 +706,6 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.12.0)"
   - GoogleUtilities/Reachability (7.12.0):
     - GoogleUtilities/Logger
-<<<<<<< HEAD
   - "gRPC-C++ (1.49.1)":
     - "gRPC-C++/Implementation (= 1.49.1)"
     - "gRPC-C++/Interface (= 1.49.1)"
@@ -786,33 +774,23 @@ PODS:
     - nanopb/encode (= 2.30909.1)
   - nanopb/decode (2.30909.1)
   - nanopb/encode (2.30909.1)
-=======
-  - GTMSessionFetcher/Core (3.3.1)
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
 
 DEPENDENCIES:
-<<<<<<< HEAD
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
-=======
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
 
 SPEC REPOS:
   trunk:
-<<<<<<< HEAD
     - abseil
     - BoringSSL-GRPC
-=======
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuth
     - FirebaseCore
-<<<<<<< HEAD
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseFirestore
@@ -824,20 +802,12 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
-=======
-    - FirebaseCoreInternal
-    - GoogleUtilities
-    - GTMSessionFetcher
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
     - PromisesObjC
     - RecaptchaInterop
 
 EXTERNAL SOURCES:
-<<<<<<< HEAD
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
-=======
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -846,19 +816,15 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-<<<<<<< HEAD
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cloud_firestore: 73eece22ce25a0565238c283ee9990f1618d8063
-=======
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
   firebase_auth: 8e9ec02991ca4659111cc671c84d0c010b6bfb26
   firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5
   FirebaseAppCheckInterop: e81bdb1cdb82f8e0cef353ba5018a8402682032c
   FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
   FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
-<<<<<<< HEAD
   FirebaseCoreExtension: 0659f035b88c5a7a15a9763c48c2e6ca8c0a2977
   FirebaseCoreInternal: efeeb171ac02d623bdaefe121539939821e10811
   FirebaseFirestore: 171bcbb57a1a348dd171a0d5e382c03ef85a77bb
@@ -874,16 +840,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
-PODFILE CHECKSUM: 78f3f16549b0a543b9cdcce2476a168424b100b0
-=======
-  FirebaseCoreInternal: b444828ea7cfd594fca83046b95db98a2be4f290
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
-  GTMSessionFetcher: 8a1b34ad97ebe6f909fb8b9b77fba99943007556
-  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-
-PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
->>>>>>> 66679150412c0cc76ce71e8ff996d9985ea66aae
+PODFILE CHECKSUM: 717baa50b302c7c688236e6e02da050a4f364aa9
 
 COCOAPODS: 1.14.3
