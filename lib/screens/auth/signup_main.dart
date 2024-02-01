@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:rest_note/screens/auth/nickname.dart';
 import 'package:rest_note/screens/auth/signup_mail.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +69,31 @@ class SignupPage extends StatelessWidget {
               backgroundColor: Colors.white,
               textColor: Colors.black,
               imagePath: 'assets/images/google.png',
-              onPressed: () {
-                // Your logic here
+              onPressed: () async {
+                try {
+                  UserCredential userCredential = await signInWithGoogle();
+                  // 로그인에 성공한 경우, NicknamePage로 이동
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => NicknamePage()),
+                  );
+                } catch (error) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Error'),
+                      content: Text(error.toString()),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }
               },
             ),
             Row(
