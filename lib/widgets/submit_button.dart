@@ -33,7 +33,7 @@ class SubmitButton extends StatelessWidget {
             style: const TextStyle(
               fontFamily: 'Comfortaa',
               color: Color(0xffFFFFFF),
-              fontSize: 20,
+              fontSize: 17,
               fontWeight: FontWeight.w500,
             ),
           ),

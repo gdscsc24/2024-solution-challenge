@@ -3,13 +3,13 @@ import 'package:rest_note/screens/diary/diary_chat.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
 import 'package:rest_note/widgets/submit_button.dart';
 
-class DiaryCoffeePage extends StatefulWidget {
-  DiaryCoffeePage({super.key});
+class DiaryChoosePage extends StatefulWidget {
+  DiaryChoosePage({super.key});
   @override
-  _DiaryCoffeePageState createState() => _DiaryCoffeePageState();
+  _DiaryChoosePageState createState() => _DiaryChoosePageState();
 }
 
-class _DiaryCoffeePageState extends State<DiaryCoffeePage> {
+class _DiaryChoosePageState extends State<DiaryChoosePage> {
   final List<String> imageUrls = [
     'assets/images/Espresso.png',
     'assets/images/Americano.png',
@@ -67,7 +67,7 @@ class _DiaryCoffeePageState extends State<DiaryCoffeePage> {
                         ),
                       ])),
               const Text(
-                'Recommend a coffee that matches your mood today',
+                'Choose 1-3 words that best describe your mood',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Comfortaa',
@@ -75,52 +75,6 @@ class _DiaryCoffeePageState extends State<DiaryCoffeePage> {
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF302E2E),
                 ),
-              ),
-              SizedBox(height: screenSize.height * 0.04),
-              Image.asset(
-                imageUrls[index],
-                width: screenSize.width * 0.38,
-              ),
-              Text(
-                coffeeList[index],
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Comfortaa',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF302E2E),
-                ),
-              ),
-              Text(
-                tasteList[index],
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Comfortaa',
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFFFF7A5C),
-                ),
-              ),
-              Slider(
-                value: _currentSliderValue,
-                min: 0.0,
-                max: 3.0,
-                label: _currentSliderValue.round().toString(),
-                onChanged: (double value) {
-                  setState(() {
-                    _currentSliderValue = value;
-                    if (value < 1) {
-                      index = 0; //부정
-                    } else if (value < 2 && value > 1) {
-                      index = 1; //중립
-                    } else {
-                      index = 2; //긍정
-                    }
-                  });
-                },
-                activeColor: const Color(0xFF8E4917),
-                inactiveColor: const Color(0xFFF2F4D6),
-                thumbColor: Colors.white,
               ),
               SizedBox(height: screenSize.height * 0.04),
               SubmitButton(
