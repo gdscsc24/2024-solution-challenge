@@ -81,8 +81,7 @@ class _IntroSlideState extends State<IntroSlide> {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignupPage()),
+                        MaterialPageRoute(builder: (context) => SignupPage()),
                       );
                     },
                     buttonText: "Let's start",
