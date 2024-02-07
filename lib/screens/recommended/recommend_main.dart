@@ -51,18 +51,24 @@ class _RecommendedMainState extends State<RecommendedMain> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: const PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight * 2),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BackAppBar(), // BackAppBar를 사용하여 AppBar 내용을 정의
-            Text(
-              'Recommended',
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-                color: Color(0xFF302E2E),
+            Padding(
+              padding: EdgeInsets.only(left: screenSize.width * 0.05),
+              child: Text(
+                'Recommended',
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 22,
+                  color: Color(0xFF302E2E),
+                ),
               ),
             ),
           ],
