@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rest_note/screens/auth/login_main.dart';
+import 'package:rest_note/screens/auth/login_mail.dart';
 import 'package:rest_note/screens/auth/nickname.dart';
 import 'package:rest_note/screens/auth/signup_mail.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rest_note/screens/auth/signup_main.dart';
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
@@ -33,7 +34,7 @@ class SignupPage extends StatelessWidget {
           children: [
             SizedBox(height: screenSize.height * 0.29),
             const Text(
-              'Create a new account',
+              'Already have an account',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Comfortaa',
@@ -44,7 +45,7 @@ class SignupPage extends StatelessWidget {
             ),
             SizedBox(height: screenSize.height * 0.03),
             SignupButton(
-              text: 'sign up with email',
+              text: 'Login with email',
               backgroundColor: const Color(0xFF333258),
               textColor: Colors.white,
               imagePath: 'assets/images/mail.png',
@@ -52,12 +53,12 @@ class SignupPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const SignupMailPage()),
+                      builder: (context) => const LoginMailPage()),
                 );
               },
             ),
             SignupButton(
-              text: 'sign up with facebook',
+              text: 'Login with facebook',
               backgroundColor: const Color(0xFF1947E5),
               textColor: Colors.white,
               imagePath: 'assets/images/facebook.png',
@@ -66,7 +67,7 @@ class SignupPage extends StatelessWidget {
               },
             ),
             SignupButton(
-              text: 'sign up with google',
+              text: 'Login with google',
               backgroundColor: Colors.white,
               textColor: Colors.black,
               imagePath: 'assets/images/google.png',
@@ -101,7 +102,7 @@ class SignupPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Already have an account?',
+                  "You're new?",
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 15,
@@ -113,11 +114,11 @@ class SignupPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => SignupPage()),
                       );
                     },
                     child: const Text(
-                      'Login',
+                      'Create new',
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 15,

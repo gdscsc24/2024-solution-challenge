@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:rest_note/screens/auth/login_main.dart';
 import 'package:rest_note/screens/auth/nickname.dart';
-// import 'package:rest_note/screens/auth/signup_verify.dart';
+import 'package:rest_note/screens/auth/signup_main.dart';
+import 'package:rest_note/screens/diary/diary_main.dart';
+
 import 'package:rest_note/widgets/submit_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SignupMailPage extends StatefulWidget {
-  const SignupMailPage({Key? key}) : super(key: key);
+class LoginMailPage extends StatefulWidget {
+  const LoginMailPage({Key? key}) : super(key: key);
 
   @override
-  _SignupMailPageState createState() => _SignupMailPageState();
+  _LoginMailPageState createState() => _LoginMailPageState();
 }
 
-class _SignupMailPageState extends State<SignupMailPage> {
+class _LoginMailPageState extends State<LoginMailPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -26,7 +27,7 @@ class _SignupMailPageState extends State<SignupMailPage> {
           children: [
             SizedBox(height: screenSize.height * 0.29),
             const Text(
-              'Sign up',
+              'Login',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Comfortaa',
@@ -104,7 +105,7 @@ class _SignupMailPageState extends State<SignupMailPage> {
                   );
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => NicknamePage()),
+                    MaterialPageRoute(builder: (context) => DiaryMainPage()),
                   );
                 } on FirebaseAuthException catch (e) {
                   // 에러 처리: 오류 메시지 표시
@@ -113,13 +114,13 @@ class _SignupMailPageState extends State<SignupMailPage> {
                   );
                 }
               },
-              buttonText: 'Sign up',
+              buttonText: 'Login',
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Already have an account?',
+                  "You're new?",
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 15,
@@ -131,11 +132,11 @@ class _SignupMailPageState extends State<SignupMailPage> {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => SignupPage()),
                       );
                     },
                     child: const Text(
-                      'Login',
+                      'Create new',
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 15,
