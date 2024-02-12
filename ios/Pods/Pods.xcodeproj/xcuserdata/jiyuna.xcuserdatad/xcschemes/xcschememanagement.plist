@@ -79,6 +79,36 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GoogleMaps-GoogleMapsResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleMaps.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GooglePlaces-framework-GooglePlacesResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GooglePlaces-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GooglePlaces-library-GooglePlacesResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GooglePlaces-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GoogleSignIn-GoogleSignIn.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -149,6 +179,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>google_maps_flutter_ios-google_maps_flutter_ios_privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>google_maps_flutter_ios.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>google_sign_in_ios-google_sign_in_ios_privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -164,7 +204,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>location.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>nanopb.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>permission_handler_apple.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
