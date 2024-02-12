@@ -5,21 +5,39 @@ import 'package:rest_note/screens/auth/signup_mail.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rest_note/screens/auth/signup_main.dart';
+import 'package:rest_note/screens/auth/auth_complete.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
+    // GoogleSignIn 객체를 여기에서 생성합니다.
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      clientId:
+          '671024400454-92oiqel6qdsj5uk6f4546efnr0br50ib.apps.googleusercontent.com',
     );
+
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+    // If googleUser is null, the sign-in process was cancelled by the user.
+    if (googleUser == null) {
+      throw FirebaseAuthException(
+        code: 'ERROR_ABORTED_BY_USER',
+        message: 'Sign in aborted by user',
+      );
+    }
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    // Create a new credential
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
@@ -77,7 +95,7 @@ class LoginPage extends StatelessWidget {
                   // 로그인에 성공한 경우, NicknamePage로 이동
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => NicknamePage()),
+                    MaterialPageRoute(builder: (context) => AuthCompletePage()),
                   );
                 } catch (error) {
                   showDialog(
