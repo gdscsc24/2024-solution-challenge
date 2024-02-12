@@ -121,7 +121,7 @@ class _LocationPageState extends State<LocationPage> {
 
   Future<void> _getNearbyTreatmentCenters(LatLng location) async {
     final places.GoogleMapsPlaces _places = places.GoogleMapsPlaces(
-      apiKey: "AIzaSyBPTQDLzQKbxM_mO2fnxpPMiuZk2naY6Qw",
+      apiKey: "",
     );
 
     final places.PlacesSearchResponse response =
