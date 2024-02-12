@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rest_note/nav_page.dart';
 
 import 'package:rest_note/screens/diary/diary_main.dart';
 import 'package:rest_note/screens/recommended/recommend_main.dart';
@@ -43,7 +44,7 @@ class _DiaryFinishPageState extends State<DiaryFinishPage> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => RecommendedMain()),
+                MaterialPageRoute(builder: (context) => MainPage()),
               );
             },
             buttonText: "Check my new recipe",
