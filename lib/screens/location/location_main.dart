@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:google_maps_webservice/places.dart' as places;
 import 'package:location/location.dart' as location;
 
@@ -13,7 +14,7 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   late GoogleMapController _controller;
   late location.Location _location;
-  late List<Marker> _markers;
+  List<Marker> _markers = [];
   location.LocationData? _currentLocation;
 
   @override
@@ -21,68 +22,7 @@ class _LocationPageState extends State<LocationPage> {
     super.initState();
     _location = location.Location();
     _markers = [];
-    _checkAndEnableLocationService(context);
     _initLocation();
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    _controller = controller;
-  }
-
-  Future<bool> _checkLocationPermission() async {
-    location.PermissionStatus permission =
-        await location.Location().hasPermission();
-    if (permission == location.PermissionStatus.denied) {
-      permission = await location.Location().requestPermission();
-      if (permission != location.PermissionStatus.granted) {
-        return false; // 권한이 거부됨
-      }
-    }
-    return true; // 권한이 허용됨
-  }
-
-  Future<void> _checkAndEnableLocationService(BuildContext context) async {
-    bool isPermissionGranted = await _checkLocationPermission();
-    if (!isPermissionGranted) {
-      // 위치 권한이 거부된 경우 처리
-      // 예를 들어, 사용자에게 위치 권한이 필요하다는 다이얼로그를 표시하거나 앱 설정으로 이동하도록 안내합니다.
-      return;
-    }
-
-    bool serviceEnabled = await location.Location().serviceEnabled();
-    if (!serviceEnabled) {
-      // 위치 서비스가 활성화되지 않은 경우 처리
-      // 사용자에게 위치 서비스를 활성화하도록 안내하는 다이얼로그를 표시합니다.
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Location Service Disabled'),
-          content: Text('Please enable location service to use this feature.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () async {
-                Navigator.of(context).pop();
-                bool serviceEnabled =
-                    await location.Location().requestService();
-                if (!serviceEnabled) {
-                  // 위치 서비스 활성화를 거부한 경우 처리
-                  // 예를 들어, 사용자에게 다시 안내하거나 기본값으로 이동하도록 안내합니다.
-                }
-              },
-              child: Text('Enable'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                // 사용자가 위치 서비스 활성화를 거부한 경우 처리
-                // 예를 들어, 다른 기능을 사용할 수 있도록 안내합니다.
-              },
-              child: Text('Cancel'),
-            ),
-          ],
-        ),
-      );
-    }
   }
 
   Future<void> _initLocation() async {
@@ -110,20 +50,73 @@ class _LocationPageState extends State<LocationPage> {
         _currentLocation = locationData;
       });
 
-      _getCurrentLocation(locationData);
+      _getCurrentLocation();
     } catch (e) {
       print("Error: $e");
     }
   }
 
-  void _getCurrentLocation(location.LocationData locationData) async {
-    LatLng currentLocation =
-        LatLng(locationData.latitude!, locationData.longitude!);
+  Future<void> checkAndEnableLocationService() async {
+    var status = await Permission.location.status;
+    if (!status.isGranted) {
+      status = await Permission.location.request();
+      if (!status.isGranted) {
+        return;
+      }
+    }
 
-    _controller
-        .animateCamera(CameraUpdate.newLatLngZoom(currentLocation, 15.0));
+    location.Location locationService = location.Location();
+    bool serviceEnabled = await locationService.serviceEnabled();
+    if (!serviceEnabled) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Location Service Disabled'),
+          content: Text('Please enable location service to use this feature.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                bool serviceEnabled = await locationService.requestService();
+                if (!serviceEnabled) {
+                  // 위치 서비스 활성화를 거부한 경우 처리
+                }
+              },
+              child: Text('Enable'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // 사용자가 위치 서비스 활성화를 거부한 경우 처리
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
-    _getNearbyTreatmentCenters(currentLocation);
+  Future<void> _getCurrentLocation() async {
+    try {
+      var locationService = location.Location();
+      bool serviceEnabled = await locationService.serviceEnabled();
+      if (serviceEnabled) {
+        location.PermissionStatus permissionGranted =
+            await locationService.hasPermission();
+        if (permissionGranted == location.PermissionStatus.granted) {
+          location.LocationData locationData =
+              await locationService.getLocation();
+          setState(() {
+            _currentLocation = locationData;
+          });
+          _getNearbyTreatmentCenters(
+              LatLng(locationData.latitude!, locationData.longitude!));
+        }
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
   }
 
   Future<void> _getNearbyTreatmentCenters(LatLng location) async {
@@ -135,7 +128,7 @@ class _LocationPageState extends State<LocationPage> {
         await _places.searchNearbyWithRadius(
       places.Location(lat: location.latitude, lng: location.longitude),
       5000,
-      type: 'hospital',
+      name: 'Treatment center',
     );
 
     _addMarkers(response.results);
@@ -172,12 +165,16 @@ class _LocationPageState extends State<LocationPage> {
           : GoogleMap(
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
-                target: LatLng(_currentLocation!.latitude!,
-                    _currentLocation!.longitude!), // 현재 위치로 초기화
+                target: LatLng(
+                    _currentLocation!.latitude!, _currentLocation!.longitude!),
                 zoom: 15.0,
               ),
               markers: Set<Marker>.of(_markers),
             ),
     );
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _controller = controller;
   }
 }
