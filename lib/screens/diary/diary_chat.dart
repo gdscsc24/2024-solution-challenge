@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rest_note/screens/diary/diary_choose.dart';
 import 'package:rest_note/screens/diary/diary_making.dart';
-import 'package:rest_note/widgets/back_appbar.dart';
+import 'package:rest_note/widgets/back_appbar_none.dart';
 import 'package:rest_note/widgets/submit_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,7 +54,7 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: const BackAppBar(),
+      appBar: BackAppBarNone(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
