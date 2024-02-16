@@ -1,4 +1,4 @@
-# rest_note
+# Moodista
 
 A new Flutter project.
 
