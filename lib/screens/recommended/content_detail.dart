@@ -28,38 +28,7 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BackAppBar(), // BackAppBar를 사용하여 AppBar 내용을 정의
-            Padding(
-              padding: EdgeInsets.only(left: screenSize.width * 0.05),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    ' Recommended',
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 23,
-                      color: Color(0xFF302E2E),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: screenSize.height * 0.018),
-                    child: Container(
-                      width: screenSize.width * 0.9,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            width: 0.7,
-                            strokeAlign: BorderSide.strokeAlignCenter,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            BackAppBar(text: 'Recommended'),
           ],
         ),
       ),

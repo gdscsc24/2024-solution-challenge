@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rest_note/screens/diary/diary_chat.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
+import 'package:rest_note/widgets/back_appbar_none.dart';
 import 'package:rest_note/widgets/submit_button.dart';
 
 class DiaryChoosePage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _DiaryChoosePageState extends State<DiaryChoosePage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: const BackAppBar(),
+        appBar: BackAppBarNone(),
         body: Center(
           child: Column(
             children: [
