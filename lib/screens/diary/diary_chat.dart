@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rest_note/screens/diary/diary_choose.dart';
 import 'package:rest_note/screens/diary/diary_making.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
-import 'package:rest_note/widgets/submit_button.dart';
+import 'package:rest_note/widgets/back_appbar_none.dart';
 
 class DiaryChatPage extends StatefulWidget {
   DiaryChatPage({super.key});
@@ -24,7 +24,7 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: const BackAppBar(),
+      appBar: BackAppBarNone(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

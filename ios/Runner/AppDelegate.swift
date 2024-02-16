@@ -12,8 +12,8 @@ import GooglePlaces
     GeneratedPluginRegistrant.register(with: self)
 
     // TODO: Add your Google Maps API key
-    GMSServices.provideAPIKey("AIzaSyBPTQDLzQKbxM_mO2fnxpPMiuZk2naY6Qw")
-    GMSPlacesClient.provideAPIKey("AIzaSyBPTQDLzQKbxM_mO2fnxpPMiuZk2naY6Qw")
+    GMSServices.provideAPIKey("")
+    GMSPlacesClient.provideAPIKey("")
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
