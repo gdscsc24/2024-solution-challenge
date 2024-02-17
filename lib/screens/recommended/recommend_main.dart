@@ -130,7 +130,7 @@ class _RecommendedMainState extends State<RecommendedMain> {
   Widget _postCard(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Consumer<ProductModel>(
-      builder: (context, productList, child) {
+      builder: (context, product, child) {
         double paddingValue = MediaQuery.of(context).size.width * 0.042;
         return InkWell(
           onTap: () {
@@ -140,7 +140,7 @@ class _RecommendedMainState extends State<RecommendedMain> {
                 transitionDuration: const Duration(milliseconds: 400),
                 pageBuilder: (context, animation, secondaryAnimation) =>
                     ContentDetailPage(
-                  contentId: 1,
+                  contentId: product.contentId,
                 ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
@@ -151,18 +151,14 @@ class _RecommendedMainState extends State<RecommendedMain> {
 
                   return SlideTransition(
                     position: previousPageOffsetAnimation,
-                    child: ContentDetailPage(
-                      contentId: 1,
-                    ),
+                    child: child,
                   );
                 },
               ),
             );
           },
           child: Padding(
-            padding: EdgeInsets.all(
-              paddingValue,
-            ),
+            padding: EdgeInsets.all(paddingValue),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -175,11 +171,13 @@ class _RecommendedMainState extends State<RecommendedMain> {
                       width: 1.0,
                     ),
                   ),
-                  child: Image.asset(
-                    "assets/images/loading_logo.png",
+                  child: Image.network(
+                    // 네트워크 이미지 로드
+                    product.imageLink,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                _buildProductDetails(context, productList),
+                _buildProductDetails(context, product),
               ],
             ),
           ),
