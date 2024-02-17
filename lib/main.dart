@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Rest_Note',
+      title: 'Moodista',
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );

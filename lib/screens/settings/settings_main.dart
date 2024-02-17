@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rest_note/screens/diary/diary_choose.dart';
-import 'package:rest_note/screens/diary/diary_making.dart';
+import 'package:rest_note/screens/settings/edit_profile.dart';
+
 import 'package:rest_note/widgets/back_appbar.dart';
-import 'package:rest_note/widgets/submit_button.dart';
+import 'package:rest_note/widgets/popup.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({super.key});
@@ -69,7 +69,12 @@ class _SettingsPageState extends State<SettingsPage> {
           RoutingButton(
               text: 'Edit Profile',
               icon: Icons.person_outline,
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                );
+              }),
           RoutingButton(
               text: 'Notifications',
               icon: Icons.notifications_none,
@@ -82,7 +87,18 @@ class _SettingsPageState extends State<SettingsPage> {
               text: 'Privacy Policy',
               icon: Icons.description_outlined,
               onPressed: () {}),
-          RoutingButton(text: 'Log out', icon: Icons.logout, onPressed: () {})
+          RoutingButton(
+              text: 'Log out',
+              icon: Icons.logout,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return MyPopup(
+                        text: 'Log out of account?', buttonText: 'Log out');
+                  },
+                );
+              })
         ],
       ),
     );

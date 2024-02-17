@@ -16,6 +16,7 @@
 #import "AppTrackingTransparencyPermissionStrategy.h"
 #import "AssistantPermissionStrategy.h"
 #import "AudioVideoPermissionStrategy.h"
+#import "BackgroundRefreshStrategy.h"
 #import "BluetoothPermissionStrategy.h"
 #import "ContactPermissionStrategy.h"
 #import "CriticalAlertsPermissionStrategy.h"
