@@ -4,6 +4,8 @@ import 'package:rest_note/screens/auth/intro_slide.dart';
 import 'package:rest_note/screens/auth/auth_complete.dart'; // AuthCompletePage 임포트
 import 'dart:async';
 
+import 'package:rest_note/screens/diary/diary_main.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -15,14 +17,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _checkAuthentication();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _checkAuthentication();
+      }
+    });
   }
 
   void _checkAuthentication() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       // 사용자가 이미 로그인되어 있다면 AuthCompletePage로 바로 이동
-      _navigateToHome();
+      Timer(const Duration(seconds: 2), () {
+        _navigateToHome();
+      });
     } else {
       // 사용자가 로그인되어 있지 않다면 일정 시간 후에 IntroSlide로 이동
       Timer(const Duration(seconds: 2), () {
@@ -33,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToHome() {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const AuthCompletePage()),
+      MaterialPageRoute(builder: (context) => DiaryMainPage()),
     );
   }
 
