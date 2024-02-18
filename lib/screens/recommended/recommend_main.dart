@@ -9,6 +9,8 @@ import 'dart:io';
 import 'package:rest_note/models/product_model.dart';
 import 'package:rest_note/screens/recommended/content_detail.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecommendedMain extends StatefulWidget {
   @override
@@ -245,79 +247,97 @@ class _RecommendedMainState extends State<RecommendedMain> {
 
   Widget _CoffeeUpgrade() {
     Size screenSize = MediaQuery.of(context).size;
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-          0, screenSize.height * 0.005, 0, screenSize.height * 0.06),
-      child: Container(
-        width: screenSize.width * 0.89,
-        height: screenSize.height * 0.2,
-        decoration: ShapeDecoration(
-          color: Color(0x7FF1F4D5),
-          shape: RoundedRectangleBorder(
-            side: BorderSide(width: 1),
-            borderRadius: BorderRadius.circular(28.13),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: screenSize.width * 0.05,
-                  vertical: screenSize.height * 0.024),
-              child: const Text(
-                'For Here or to Go?',
-                style: TextStyle(
-                  fontFamily: 'Comfortaa',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                  color: Colors.black,
-                ),
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    return FutureBuilder<DocumentSnapshot>(
+      future:
+          _firestore.collection('users').doc(_auth.currentUser?.email).get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        var userNickname = 'defaultNickname';
+        if (snapshot.data != null && snapshot.data!.exists) {
+          userNickname = snapshot.data!.get('nickname');
+        }
+
+        return Padding(
+          padding: EdgeInsets.fromLTRB(
+              0, screenSize.height * 0.005, 0, screenSize.height * 0.06),
+          child: Container(
+            width: screenSize.width * 0.89,
+            height: screenSize.height * 0.2,
+            decoration: ShapeDecoration(
+              color: Color(0x7FF1F4D5),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 1),
+                borderRadius: BorderRadius.circular(28.13),
               ),
             ),
-            Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: screenSize.width * 0.05),
-                Image.asset('assets/images/Espresso_Romano.png',
-                    width: screenSize.width * 0.27),
-                SizedBox(width: screenSize.width * 0.035),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: screenSize.width * 0.05,
+                      vertical: screenSize.height * 0.024),
+                  child: Text(
+                    'For Here or to Go?',
+                    style: TextStyle(
+                      fontFamily: 'Comfortaa',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Row(
                   children: [
-                    Text(
-                      'Espresso Romano',
-                      style: TextStyle(
-                        fontFamily: 'Comfortaa',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 17,
-                        color: Color(0xFFFF7A5C),
-                      ),
-                    ),
-                    Text(
-                      "\n to upgrade Mishro's mood!",
-                      style: TextStyle(
-                        fontFamily: 'Comfortaa',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 10,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      "\n refreshing taste from sugar and lemon",
-                      style: TextStyle(
-                        fontFamily: 'Comfortaa',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 9,
-                        color: Color(0xFF757575),
-                      ),
+                    SizedBox(width: screenSize.width * 0.05),
+                    Image.asset('assets/images/Espresso_Romano.png',
+                        width: screenSize.width * 0.27),
+                    SizedBox(width: screenSize.width * 0.035),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Espresso Romano',
+                          style: TextStyle(
+                            fontFamily: 'Comfortaa',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 17,
+                            color: Color(0xFFFF7A5C),
+                          ),
+                        ),
+                        Text(
+                          "\n to upgrade $userNickname's mood!",
+                          style: TextStyle(
+                            fontFamily: 'Comfortaa',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 10,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          "\n refreshing taste from sugar and lemon",
+                          style: TextStyle(
+                            fontFamily: 'Comfortaa',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 9,
+                            color: Color(0xFF757575),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
-                ),
+                )
               ],
-            )
-          ],
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
