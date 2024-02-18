@@ -3,6 +3,9 @@ import 'package:rest_note/screens/settings/edit_profile.dart';
 
 import 'package:rest_note/widgets/back_appbar.dart';
 import 'package:rest_note/widgets/popup.dart';
+import 'package:rest_note/screens/auth/signup_main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({super.key});
@@ -11,6 +14,13 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  void _logoutAndNavigateToSignup() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => SignupPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -94,8 +104,27 @@ class _SettingsPageState extends State<SettingsPage> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return MyPopup(
-                        text: 'Log out of account?', buttonText: 'Log out');
+                    return AlertDialog(
+                      title: Text('Log out of account?'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('Cancel'),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // 대화 상자 닫기
+                          },
+                        ),
+                        TextButton(
+                          child: Text('Log out'),
+                          onPressed: () async {
+                            await FirebaseAuth.instance.signOut(); // 로그아웃 실행
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => SignupPage()),
+                            );
+                          },
+                        ),
+                      ],
+                    );
                   },
                 );
               })
