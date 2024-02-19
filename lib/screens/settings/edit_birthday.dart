@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
 
 class EditBirthdayPage extends StatefulWidget {
@@ -11,6 +12,28 @@ class EditBirthdayPage extends StatefulWidget {
 
 class _EditBirthdayPageState extends State<EditBirthdayPage> {
   final TextEditingController _controller = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  void _updateBirthday() async {
+    String? userEmail = _auth.currentUser?.email; // 현재 로그인한 유저의 이메일 가져오기
+    String birthday = _controller.text; // TextField에서 입력한 생일 데이터
+
+    if (userEmail != null && birthday.isNotEmpty) {
+      try {
+        await _firestore.collection('users').doc(userEmail).update({
+          'birthday': birthday, // 'birthday' 필드 업데이트
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Birthday updated successfully!')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error updating birthday: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +107,9 @@ class _EditBirthdayPageState extends State<EditBirthdayPage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.065),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _updateBirthday();
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFF333258),
                 shape: RoundedRectangleBorder(
