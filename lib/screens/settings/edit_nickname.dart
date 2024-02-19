@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
 import 'package:rest_note/widgets/submit_button.dart';
 
@@ -11,6 +12,19 @@ class EditNicknamePage extends StatefulWidget {
 
 class _EditNicknamePageState extends State<EditNicknamePage> {
   final TextEditingController _emailController = TextEditingController();
+
+  Future<void> _updateNickname(String nickname) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null && user.email != null) {
+      final email = user.email!; // 사용자 이메일
+      final collectionRef = FirebaseFirestore.instance.collection('users');
+      final docRef = collectionRef.doc(email); // 이메일을 문서 ID로 사용
+      await docRef.update({'nickname': nickname});
+    } else {
+      throw Exception('No authenticated user found.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -70,7 +84,16 @@ class _EditNicknamePageState extends State<EditNicknamePage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.065),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final nickname = _emailController.text;
+                _updateNickname(nickname).then((_) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('닉네임이 업데이트되었습니다!')));
+                }).catchError((error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('닉네임 업데이트에 실패했습니다: $error')));
+                });
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFF333258),
                 shape: RoundedRectangleBorder(
