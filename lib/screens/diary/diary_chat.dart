@@ -6,6 +6,8 @@ import 'package:rest_note/widgets/submit_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:rest_note/constants/event_text.dart';
+import 'package:rest_note/constants/event_color.dart';
 
 class DiaryChatPage extends StatefulWidget {
   DiaryChatPage({super.key});
@@ -15,16 +17,9 @@ class DiaryChatPage extends StatefulWidget {
 
 class _DiaryChatPageState extends State<DiaryChatPage> {
   final TextEditingController _textController = TextEditingController();
-  final List<String> imageUrls = [
-    'assets/images/Espresso.png',
-    'assets/images/Americano.png',
-    'assets/images/Macchiato.png',
-  ];
-  List<String> coffeeList = ['Espresso', 'Americano', 'Macchiato'];
-  List<String> tasteList = ['bitter', 'balanced', 'sweet'];
-  double _currentSliderValue = 0;
-  int index = 0;
 
+  int index = 0;
+  bool chat = false;
   Future<void> _saveTextToFirestore() async {
     if (_textController.text.isEmpty) {
       // 텍스트가 비어있다면 저장하지 않음
@@ -54,109 +49,132 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: BackAppBarNone(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: screenSize.height * 0.06),
-          Padding(
-            padding: EdgeInsets.only(left: screenSize.width * 0.082),
-            child: Container(
-              width: screenSize.width * 0.53,
-              height: screenSize.height * 0.08,
-              decoration: BoxDecoration(
-                  color: Color(0xFFFFFBF2),
-                  borderRadius: BorderRadius.circular(5)),
+        appBar: BackAppBarNone(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
               padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.03),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: const TextSpan(
-                  text: 'Tell me more about your emotion.',
-                  style: TextStyle(
-                    fontFamily: 'Rubik',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF403E39),
-                    decoration: TextDecoration.underline, // 밑줄 추가
-                    decorationColor: Color(0xFFE9E4D1), // 밑줄 색상 지정
-                    decorationThickness: 2.0, // 밑줄 두께 지정
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: screenSize.height * 0.05),
-          Padding(
-            padding: EdgeInsets.only(left: screenSize.width * 0.31),
-            child: Container(
-              width: screenSize.width * 0.63,
-              child: TextField(
-                controller: _textController,
-                decoration: InputDecoration(
-                  filled: true, // 배경색 적용
-                  fillColor: Color(0xFFFFFBF2), // 배경색 지정
-                  hintText: 'Write here...',
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Rubik',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF403E39),
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-                  border: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // 텍스트 필드의 모서리 둥글기 설정
-                    borderSide: BorderSide.none, // 테두리 제거
-                  ),
-                ),
+              child: Text(
+                'Which event caused your feelings?',
                 style: const TextStyle(
-                  fontFamily: 'Rubik',
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF403E39),
-                  decoration: TextDecoration.underline,
-                  decorationColor: Color(0xFFE9E4D1),
-                  decorationThickness: 2.0,
+                  fontFamily: 'Comfortaa',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
                 ),
-                maxLines: null,
+              ),
+            ),
+            Column(
+              children: [
+                for (var i = 0; i < eventTextList.length; i++)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(eventTextList[i].length, (index) {
+                      return EventButton(
+                        event: eventTextList[i][index],
+                        color: eventColorList[i][index], // 이벤트 색상 적용
+                        onPressed1: () {
+                          setState(() {
+                            chat = true;
+                          });
+                          print('Selected event: ${eventTextList[i][index]}');
+                        },
+                      );
+                    }),
+                  ),
+                if (chat) ChatWidget()
+              ],
+            ),
+          ],
+        ));
+  }
+
+  Widget ChatWidget() {
+    @override
+    Size screenSize = MediaQuery.of(context).size;
+    final TextEditingController _textController = TextEditingController();
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: EdgeInsets.only(left: screenSize.width * 0.08),
+        child: Container(
+          width: screenSize.width * 0.53,
+          height: screenSize.height * 0.08,
+          decoration: BoxDecoration(
+              color: Color(0xFFFFFBF2), borderRadius: BorderRadius.circular(5)),
+          padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.03),
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: const TextSpan(
+              text: 'Tell me more about your emotion.',
+              style: TextStyle(
+                fontFamily: 'Rubik',
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF403E39),
+                decoration: TextDecoration.underline, // 밑줄 추가
+                decorationColor: Color(0xFFE9E4D1), // 밑줄 색상 지정
+                decorationThickness: 2.0, // 밑줄 두께 지정
               ),
             ),
           ),
-          SizedBox(height: screenSize.height * 0.01),
-          Row(
-            children: [
-              SizedBox(width: screenSize.width * 0.5),
-              ChatButton(
-                  text: 'Skip',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DiaryChoosePage()),
-                    );
-                  }),
-              SizedBox(width: screenSize.width * 0.03),
-              ChatButton(
-                text: 'Done',
-                onPressed: () {
-                  _saveTextToFirestore().then((_) {
-                    // 성공적으로 저장 후에 다음 페이지로 이동
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DiaryMakingPage()),
-                    );
-                  }).catchError((error) {
-                    // 오류 처리...
-                  });
-                },
-              ),
-            ],
-          )
-        ],
+        ),
       ),
-    );
+      SizedBox(height: screenSize.height * 0.05),
+      Padding(
+        padding: EdgeInsets.only(left: screenSize.width * 0.31),
+        child: Container(
+          width: screenSize.width * 0.63,
+          child: TextField(
+            controller: _textController,
+            decoration: InputDecoration(
+              filled: true, // 배경색 적용
+              fillColor: Color(0xFFFFFBF2), // 배경색 지정
+              hintText: 'Write here...',
+              hintStyle: const TextStyle(
+                fontFamily: 'Rubik',
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF403E39),
+              ),
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0), // 텍스트 필드의 모서리 둥글기 설정
+                borderSide: BorderSide.none, // 테두리 제거
+              ),
+            ),
+            style: const TextStyle(
+              fontFamily: 'Rubik',
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF403E39),
+              decoration: TextDecoration.underline,
+              decorationColor: Color(0xFFE9E4D1),
+              decorationThickness: 2.0,
+            ),
+            maxLines: null,
+          ),
+        ),
+      ),
+      SizedBox(height: screenSize.height * 0.01),
+      Row(children: [
+        SizedBox(width: screenSize.width * 0.74),
+        ChatButton(
+          text: 'Done',
+          onPressed: () {
+            _saveTextToFirestore().then((_) {
+              // 성공적으로 저장 후에 다음 페이지로 이동
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DiaryMakingPage()),
+              );
+            }).catchError((error) {
+              // 오류 처리...
+            });
+          },
+        ),
+      ]),
+    ]);
   }
 }
 
@@ -189,9 +207,52 @@ class ChatButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(width: 8),
           Text(
             text,
+            style: const TextStyle(
+              fontFamily: 'Comfortaa',
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class EventButton extends StatelessWidget {
+  final String event;
+  final VoidCallback onPressed1;
+  final Color color;
+
+  EventButton(
+      {required this.event, required this.onPressed1, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
+    return ElevatedButton(
+      onPressed: onPressed1,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.black,
+        backgroundColor: color,
+        minimumSize: Size(
+          screenSize.width * 0.1,
+          screenSize.height * 0.028,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            event,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontFamily: 'Comfortaa',
               fontSize: 10,

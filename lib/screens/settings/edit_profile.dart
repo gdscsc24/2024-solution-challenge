@@ -46,7 +46,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   context: context,
                   builder: (BuildContext context) {
                     return MyPopup(
-                        text: 'Delete account?', buttonText: 'delete');
+                        text: 'Delete account?',
+                        buttonText: 'delete',
+                        onPressed: () {});
                   },
                 );
               }),
