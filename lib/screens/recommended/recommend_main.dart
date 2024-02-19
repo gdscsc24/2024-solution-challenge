@@ -94,7 +94,6 @@ class _RecommendedMainState extends State<RecommendedMain> {
                   })
             ],
           ),
-          _CoffeeUpgrade(),
           Expanded(
             child: _postListView(),
           ),
@@ -103,32 +102,31 @@ class _RecommendedMainState extends State<RecommendedMain> {
     );
   }
 
-  // 게시물 리스트 위젯
   Widget _postListView() {
     if (productList.isEmpty) {
       return Center(
         child: Text('No products available'),
       );
     } else {
-      return ListView.separated(
+      return ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: productList.length,
+        itemCount: productList.length +
+            1, // 제품 수에 1을 더하여 CoffeeUpgrade 위젯을 추가할 자리를 만듭니다.
         itemBuilder: (context, index) {
+          // 첫 번째 아이템일 경우 CoffeeUpgrade 위젯을 반환합니다.
+          if (index == 0) {
+            return _CoffeeUpgrade();
+          }
+          // 나머지 경우에는 제품 카드를 반환합니다.
           return ChangeNotifierProvider<ProductModel>.value(
-            value: productList[index],
+            value: productList[index - 1], // index - 1을 해서 제품 목록에 맞는 제품을 가져옵니다.
             child: _postCard(context),
-          );
-        },
-        separatorBuilder: (context, i) {
-          return const Divider(
-            height: 1,
           );
         },
       );
     }
   }
 
-  // 게시물 리스트에서 게시물 하나에 대한 위젯
   Widget _postCard(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Consumer<ProductModel>(
@@ -213,18 +211,20 @@ class _RecommendedMainState extends State<RecommendedMain> {
         children: [
           Row(
             children: [
-              Text(
-                productList.title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  color: Color(0xFF757575),
+              Container(
+                width: screenSize.width * 0.35,
+                child: Text(
+                  productList.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    color: Color(0xFF757575),
+                  ),
                 ),
               ),
-              SizedBox(width: screenSize.width * 0.08),
               IconButton(onPressed: () {}, icon: Icon(Icons.favorite_outline))
             ],
           ),
@@ -265,7 +265,10 @@ class _RecommendedMainState extends State<RecommendedMain> {
 
         return Padding(
           padding: EdgeInsets.fromLTRB(
-              0, screenSize.height * 0.005, 0, screenSize.height * 0.06),
+              screenSize.width * 0.04,
+              screenSize.height * 0.005,
+              screenSize.width * 0.04,
+              screenSize.height * 0.06),
           child: Container(
             width: screenSize.width * 0.89,
             height: screenSize.height * 0.2,

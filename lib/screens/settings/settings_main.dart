@@ -104,26 +104,15 @@ class _SettingsPageState extends State<SettingsPage> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Log out of account?'),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text('Cancel'),
-                          onPressed: () {
-                            Navigator.of(context).pop(); // 대화 상자 닫기
-                          },
-                        ),
-                        TextButton(
-                          child: Text('Log out'),
-                          onPressed: () async {
-                            await FirebaseAuth.instance.signOut(); // 로그아웃 실행
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => SignupPage()),
-                            );
-                          },
-                        ),
-                      ],
+                    return MyPopup(
+                      text: 'Log out of account?',
+                      buttonText: 'Log out',
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signOut(); // 로그아웃 실행
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => SignupPage()),
+                        );
+                      },
                     );
                   },
                 );
