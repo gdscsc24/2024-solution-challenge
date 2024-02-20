@@ -3,11 +3,11 @@
   <img src="assets/images/loading_logo.png" alt="Logo" width="200"/>
 </div>
 
-Moodista is a mental health self-care app for modern people.
+Moodista ☕️ is a mental health self-care app for modern people.
 
- **Diary-based sentiment analysis** provides customized content.
-
-Pursue healthy life and well-being for all age groups by supporting connections with communities and treatment centers.
+ **Diary-based sentiment analysis** provides you with customized contents 😊!
+ 
+Pursue healthy life and well-being for all age groups 🌱 by supporting connections with communities and treatment centers. 
 
 ## Members
 
