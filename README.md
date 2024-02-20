@@ -45,7 +45,6 @@ samples, guidance on mobile development, and a full API reference.
 
 ### Architecture
 
-'''
 app
 
 ├── assets
@@ -77,7 +76,6 @@ app
 │ └── settings
 
 └── widgets
-'''
 
 ## Back-End
 
