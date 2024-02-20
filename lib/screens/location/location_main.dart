@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:google_maps_webservice/places.dart' as places;
 import 'package:location/location.dart' as location;
+import 'package:rest_note/widgets/back_appbar.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -121,14 +122,14 @@ class _LocationPageState extends State<LocationPage> {
 
   Future<void> _getNearbyTreatmentCenters(LatLng location) async {
     final places.GoogleMapsPlaces _places = places.GoogleMapsPlaces(
-      apiKey: "",
+      apiKey: "AIzaSyBPTQDLzQKbxM_mO2fnxpPMiuZk2naY6Qw",
     );
 
     final places.PlacesSearchResponse response =
         await _places.searchNearbyWithRadius(
       places.Location(lat: location.latitude, lng: location.longitude),
       5000,
-      name: 'Treatment center',
+      name: '치료센터',
     );
 
     _addMarkers(response.results);
@@ -156,21 +157,27 @@ class _LocationPageState extends State<LocationPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Treatment Centers'),
-      ),
-      body: _currentLocation == null
-          ? Center(child: CircularProgressIndicator())
-          : GoogleMap(
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: LatLng(
-                    _currentLocation!.latitude!, _currentLocation!.longitude!),
-                zoom: 15.0,
+      body: Column(children: [
+        BackAppBar(text: 'Treatment Centers'),
+        _currentLocation == null
+            ? Column(
+                children: [
+                  SizedBox(height: screenSize.height * 0.3),
+                  Center(child: CircularProgressIndicator()),
+                ],
+              )
+            : GoogleMap(
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(_currentLocation!.latitude!,
+                      _currentLocation!.longitude!),
+                  zoom: 15.0,
+                ),
+                markers: Set<Marker>.of(_markers),
               ),
-              markers: Set<Marker>.of(_markers),
-            ),
+      ]),
     );
   }
 

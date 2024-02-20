@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rest_note/screens/diary/diary_coffee.dart';
+import 'package:rest_note/screens/my_history.dart';
+import 'package:rest_note/screens/settings/settings_main.dart';
 
 class DiaryMainPage extends StatefulWidget {
   DiaryMainPage({super.key});
@@ -18,7 +20,7 @@ class _DiaryMainPageState extends State<DiaryMainPage> {
             title: Row(
           children: [
             const Text(
-              'Rest Note',
+              'Moodista',
               style: TextStyle(
                 fontFamily: 'Comfortaa',
                 fontSize: 22,
@@ -26,16 +28,35 @@ class _DiaryMainPageState extends State<DiaryMainPage> {
                 color: Color(0xFF302E2E),
               ),
             ),
-            SizedBox(width: screenSize.width * 0.31),
-            Padding(
-              padding: EdgeInsets.only(right: screenSize.width * 0.07),
-              child: const Icon(Icons.settings),
+            Row(
+              children: [
+                SizedBox(width: screenSize.width * 0.23),
+                Padding(
+                    padding: EdgeInsets.only(right: screenSize.width * 0.05),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingsPage()),
+                          );
+                        },
+                        icon: Icon(Icons.settings))),
+                Padding(
+                  padding: EdgeInsets.only(right: screenSize.width * 0.05),
+                  child: const Icon(Icons.notifications),
+                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyHistoryPage()),
+                      );
+                    },
+                    icon: Icon(Icons.person_outline_outlined)),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(right: screenSize.width * 0.07),
-              child: const Icon(Icons.notifications),
-            ),
-            const Icon(Icons.person_outline),
           ],
         )),
         body: Center(

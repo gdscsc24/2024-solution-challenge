@@ -32,7 +32,7 @@ class _IntroSlideState extends State<IntroSlide> {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF1F1),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: Padding(
         padding: EdgeInsets.only(top: screenSize.height * 0.23),
         child: PageView.builder(
@@ -59,7 +59,7 @@ class _IntroSlideState extends State<IntroSlide> {
                       EdgeInsets.symmetric(horizontal: screenSize.width * 0.17),
                   child: Image.asset(
                     imageUrls[index],
-                    width: screenSize.width * 0.65,
+                    width: screenSize.width * 0.52,
                   ),
                 ),
                 Padding(
