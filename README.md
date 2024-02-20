@@ -3,7 +3,7 @@
   <img src="assets/images/loading_logo.png" alt="Logo" width="250"/>
 </div>
 
-
+<br>
 Moodista ☕️ is a mental health self-care app for modern people.
 
  **Diary-based sentiment analysis** provides you with customized contents!
