@@ -20,6 +20,10 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+### How to learning the App?
+- install Flutter and Simulator
+- play 'flutter pub get' in terminal to install environments
+- Start debugging in 'main.dart' file
 
 ## Front-End
 ### Tech Stack
