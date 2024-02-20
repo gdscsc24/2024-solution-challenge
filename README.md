@@ -6,6 +6,7 @@
 Moodista is a mental health self-care app for modern people.
 
  **Diary-based sentiment analysis** provides customized content.
+
 Pursue healthy life and well-being for all age groups by supporting connections with communities and treatment centers.
 
 ## Members
