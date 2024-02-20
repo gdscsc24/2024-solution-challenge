@@ -40,7 +40,7 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     await documentReference.set({
       'date': now,
       'text': text,
-    });
+    }, SetOptions(merge: true));
 
     // 선택적으로 사용자에게 성공 메시지를 보여줄 수 있습니다.
   }
