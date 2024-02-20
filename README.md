@@ -67,11 +67,11 @@ app
 
 ### Model Architecture
 
-This project aims to classify text sentiments using MobileBERT, a lightweight version of the BERT model optimized for mobile devices. We leverage MediaPipe Model Maker, a tool for customizing existing machine learning models to suit our specific data and applications. This customized model is trained to classify emotions based on user-provided emotion diaries as input. More information can be found on [the official page](https://developers.google.com/mediapipe/solutions/customization/text_classifier).
+This project aims to classify text sentiments using MobileBERT, a lightweight version of the BERT model optimized for mobile devices. We leverage MediaPipe Model Maker, a tool for customizing existing machine learning models to suit our specific data and applications. This customized model is trained to classify emotions based on user-provided emotion diaries as input. More information can be found on [the online documentation](https://developers.google.com/mediapipe/solutions/customization/text_classifier).
 
 ### Dataset
 
-The model is trained on a custom dataset consisting of emotion entries collected from the Google AI GOEmotions dataset (GoEmotions). The GoEmotions consists of comments from Reddit users with labels of their emotional coloring. Each entry is associated with a particular emotion label (joy, sadness, fear, anxiety, ...), allowing the model to learn to associate text patterns with specific emotional states. The dataset is preprocessed and formatted to suit the input requirements of the MobileBERT model. You can download a raw dataset on [the Kaggle page](https://www.kaggle.com/datasets/shivamb/go-emotions-google-emotions-dataset).
+The model is trained on a custom dataset consisting of emotion entries collected from the Google AI GOEmotions dataset (GoEmotions). The GoEmotions consists of comments from Reddit users with labels of their emotional coloring. Each entry is associated with a particular emotion label (joy, sadness, fear, anxiety, ...), allowing the model to learn to associate text patterns with specific emotional states. The dataset is preprocessed and formatted to suit the input requirements of the MobileBERT model. You can download a raw dataset on [the official Kaggle page](https://www.kaggle.com/datasets/shivamb/go-emotions-google-emotions-dataset).
 
 ### Deployment
 To deploy the sentiment classification model on resource-constrained devices such as mobile phones or edge devices, we convert the trained model to TensorFlow Lite (TFLite) format. TFLite provides efficient execution of machine learning models on edge devices with low latency and reduced memory footprint.
