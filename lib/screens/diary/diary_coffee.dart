@@ -3,6 +3,9 @@ import 'package:rest_note/screens/diary/diary_chat.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
 import 'package:rest_note/widgets/back_appbar_none.dart';
 import 'package:rest_note/widgets/submit_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class DiaryCoffeePage extends StatefulWidget {
   DiaryCoffeePage({super.key});
@@ -11,6 +14,28 @@ class DiaryCoffeePage extends StatefulWidget {
 }
 
 class _DiaryCoffeePageState extends State<DiaryCoffeePage> {
+  void saveMoodToFirestore(int moodIndex) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final userEmail = user.email; // Get the current user's email
+      final dateId = DateFormat('yyyy-MM-dd')
+          .format(DateTime.now()); // Format the date as '2024-02-19'
+      final documentReference = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userEmail) // Use the user's email as the document ID
+          .collection('datas')
+          .doc(dateId); // Use the formatted date as the document ID
+
+      await documentReference.set(
+          {
+            'mood': moodIndex, // Save the mood index
+          },
+          SetOptions(
+              merge:
+                  true)); // Merge the data with existing document to avoid overwriting
+    }
+  }
+
   final List<String> imageUrls = [
     'assets/images/Espresso.png',
     'assets/images/Americano.png',
@@ -126,6 +151,7 @@ class _DiaryCoffeePageState extends State<DiaryCoffeePage> {
               SizedBox(height: screenSize.height * 0.04),
               SubmitButton(
                 onPressed: () {
+                  saveMoodToFirestore(index);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => DiaryChatPage()),
