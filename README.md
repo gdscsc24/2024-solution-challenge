@@ -11,10 +11,12 @@ Pursue healthy life and well-being for all age groups 🌱 by supporting connect
 
 ## Members
 
-* Lee Jaehee - AI / Design
-* Ji Yuna - Front-end
-* Choi Wonhyeok - Back-end
-* Jeon Wooseok - AI
+| Team Member   | Role           |
+|---------------|----------------|
+| Lee Jaehee    | AI / Design    |
+| Ji Yuna       | Front-end      |
+| Choi Wonhyeok | Back-end       |
+| Jeon Wooseok  | AI             |
 
 ## Getting Started
 
