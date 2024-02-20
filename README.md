@@ -38,7 +38,8 @@ samples, guidance on mobile development, and a full API reference.
 - Google sign in : 6.2.1
 
 ### Architecture
-'''    
+
+'''bash
 app
 ├── assets
 │ ├── fonts
