@@ -21,11 +21,8 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
   int index = 0;
   bool chat = false;
   Future<void> _saveTextToFirestore() async {
-    if (_textController.text.isEmpty) {
-      // 텍스트가 비어있다면 저장하지 않음
-      return;
-    }
-    String text = _textController.text;
+    String text =
+        _textController.text.isEmpty ? "Plain text" : _textController.text;
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
 
@@ -33,16 +30,29 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     String userEmail = currentUser?.email ?? 'default_email';
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('users')
-        .doc(userEmail) // 사용자 이메일을 문서 ID로 사용
+        .doc(userEmail)
         .collection('datas')
-        .doc(formattedDate); // 오늘 날짜로 문서 이름을 지정
+        .doc(formattedDate);
 
     await documentReference.set({
-      'date': now,
       'text': text,
-    }, SetOptions(merge: true));
-
-    // 선택적으로 사용자에게 성공 메시지를 보여줄 수 있습니다.
+    }, SetOptions(merge: true)).then((_) {
+      // 성공 메시지를 표시합니다.
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Text saved successfully'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }).catchError((error) {
+      // 실패 메시지를 표시합니다.
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to save text'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    });
   }
 
   @override
@@ -92,7 +102,6 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
   Widget ChatWidget() {
     @override
     Size screenSize = MediaQuery.of(context).size;
-    final TextEditingController _textController = TextEditingController();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
         padding: EdgeInsets.only(
