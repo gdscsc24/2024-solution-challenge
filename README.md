@@ -7,6 +7,11 @@ Pursue healthy life and well-being for all age groups by supporting connections 
 
 ## Members
 
+* Lee Jaehee - AI / Design
+* Ji Yuna - Front-end
+* Choi Wonhyeok - Back-end
+* Jeon Wooseok - AI
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
@@ -20,14 +25,14 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-### How to learning the App?
+### Implementation of App
 - install Flutter and Simulator
 - play 'flutter pub get' in terminal to install environments
 - Start debugging in 'main.dart' file
 
 ## Front-End
 ### Tech Stack
-- Futter : 3.16.9
+- Flutter : 3.16.9
 - Dart : 3.2.6
 - Google maps flutter : 2.5.3
 - Google sign in : 6.2.1
@@ -55,11 +60,6 @@ app
 
     
 '''
-
-
-    
-
-
 
 ## Back-End
 
