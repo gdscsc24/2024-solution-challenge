@@ -43,14 +43,16 @@ samples, guidance on mobile development, and a full API reference.
     │   ├── models
     │   ├── providers
     │   └── screens
-    │           ├── auth
-    │           ├── diary
-    │           ├── likes
-    │           ├── location
-    │           ├── recommended 
-    │           └── settings
+    │       ├── auth
+    │       ├── diary
+    │       ├── likes
+    │       ├── location
+    │       ├── recommended 
+    │       └── settings
     ├── widgets
     └── main.dart
+
+    
 '''
 
 
