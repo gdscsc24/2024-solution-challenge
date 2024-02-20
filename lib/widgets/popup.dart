@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 class MyPopup extends StatelessWidget {
   final String text;
   final String buttonText;
-  const MyPopup({super.key, required this.text, required this.buttonText});
+  final VoidCallback onPressed;
+  const MyPopup(
+      {super.key,
+      required this.text,
+      required this.buttonText,
+      required this.onPressed});
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
@@ -35,7 +41,7 @@ class MyPopup extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: onPressed,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFD9D9D9),
                         shape: RoundedRectangleBorder(

@@ -14,7 +14,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int currentTabIndex = 0;
+  int currentTabIndex = 1;
 
   final List<Widget> _bodyPage = <Widget>[
     LocationPage(),
