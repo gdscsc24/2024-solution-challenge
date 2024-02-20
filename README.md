@@ -1,5 +1,5 @@
 # Moodista
-![Logo]('assets/images/loading_logo.png')
+![Logo](assets/images/loading_logo.png)
 Moodista is a mental health self-care app for modern people.
 
  **Diary-based sentiment analysis** provides customized content.
@@ -39,7 +39,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ### Architecture
 
-'''bash
+'''
 app
 ├── assets
 │ ├── fonts
