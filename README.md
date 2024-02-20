@@ -6,9 +6,9 @@
 
 Moodista ☕️ is a mental health self-care app for modern people.
 
- **Diary-based sentiment analysis** provides you with customized contents 😊!
+ **Diary-based sentiment analysis** provides you with customized contents!
  
-Pursue healthy life and well-being for all age groups 🌱 by supporting connections with communities and treatment centers. 
+Pursue healthy life and well-being for all age groups by supporting connections with communities and treatment centers. 
 
 ## Members
 
@@ -51,23 +51,24 @@ samples, guidance on mobile development, and a full API reference.
 
 ### Architecture
 
+```
 app
-
-|-- assets
-||-- fonts
-||-- images
-|-- lib
-||-- constants
-||-- models
-||-- providers
-||-- screens
-||-- auth
-||-- diary
-||-- likes
-||-- location
-||-- recommended
-||-- settings
-||-- widgets
+├── assets
+│ ├── fonts
+│ └── images
+├── lib
+│ ├── constants
+│ ├── models
+│ ├── providers
+│ └── screens
+│ ├── auth
+│ ├── diary
+│ ├── likes
+│ ├── location
+│ ├── recommended
+│ └── settings
+└── widgets
+```
 
 ## Back-End
 
