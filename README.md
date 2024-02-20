@@ -52,7 +52,15 @@ app
     │       └── settings
     ├── widgets
     └── main.dart
-
+ ├── common
+    │   ├── util
+    │   └── values
+    │       └── styles
+    ├── data
+    │   ├── enums
+    │   ├── errors
+    │   ├── models
+    │   └── providers
     
 '''
 
