@@ -37,11 +37,16 @@ samples, guidance on mobile development, and a full API reference.
 - Start debugging in 'main.dart' file
 
 ## Front-End
+
 ### Tech Stack
 - Flutter : 3.16.9
 - Dart : 3.2.6
 - Google maps flutter : 2.5.3
 - Google sign in : 6.2.1
+- intl: 0.18.1
+- firebase_core: 2.24.2
+- firebase_auth: 4.16.0
+- cloud_firestore: 4.14.0
 
 ### Architecture
 
