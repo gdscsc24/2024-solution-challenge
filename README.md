@@ -34,6 +34,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ### Architecture
 '''    
+app 
     ├── assets
     │   ├── fonts
     │   └── images
