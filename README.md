@@ -1,6 +1,7 @@
 # Moodista
 
-A new Flutter project.
+'assets/images/loading_logo.png'
+
 
 ## Getting Started
 
