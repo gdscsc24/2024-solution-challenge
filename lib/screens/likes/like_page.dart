@@ -23,11 +23,11 @@ class _LikesMainState extends State<LikesMain> {
 
   late List<bool> heartStatusList;
   String activeButton = 'activity';
-  bool activityPage = false;
+  bool activityPage = true;
   @override
   void initState() {
     super.initState();
-    _loadProductList('assets/lists.json');
+    _loadProductList('assets/activity.json');
   }
 
   @override
