@@ -71,6 +71,10 @@ app
 
 ## Back-End
 
+The user authentication system provided by firebase allows users to log in using email and Google login. The user's email information and the data to be searched based on the model's results were stored in the firestore. All the data that the user records on a daily basis is collected and managed using firestore.
+
+To deploy the function and apply it to the app, we used Google cloud function. After using Bert Model to make it lightweight with tflite model, we imported the user's text from firestore and put it as the input of the function, and made it so that the app receives the result in json format. As a result, the app stores the information in firestore and uses it to recommend videos in the future.
+
 ## AI
 
 ### Model Architecture
