@@ -45,7 +45,7 @@ samples, guidance on mobile development, and a full API reference.
         ├── screens
         │       ├── auth
         │       ├── diary
-        │       ├── likes
+        │       |-- likes
         │       ├── location
         │       ├── recommended
         │       └── settings
