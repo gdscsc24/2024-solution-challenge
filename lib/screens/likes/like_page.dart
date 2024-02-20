@@ -21,31 +21,33 @@ class _LikesMainState extends State<LikesMain> {
 
   final ScrollController _scrollController = ScrollController();
 
-  bool pressed = false;
-
+  late List<bool> heartStatusList;
+  String activeButton = 'activity';
+  bool activityPage = false;
   @override
   void initState() {
     super.initState();
-    _loadProductList();
+    _loadProductList('assets/lists.json');
   }
 
   @override
   void dispose() {
-    // _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
   }
 
-  Future<void> _loadProductList() async {
+  Future<void> _loadProductList(String jsonFileName) async {
     try {
       // JSON 파일을 읽어옴
-      String jsonString = await rootBundle.loadString('assets/lists.json');
+      String jsonString = await rootBundle.loadString('$jsonFileName');
       // JSON을 Map으로 디코딩
       List<dynamic> jsonData = json.decode(jsonString);
+      productList.clear();
       // 각 항목을 ProductModel로 변환하여 productList에 추가
       for (var item in jsonData) {
         productList.add(ProductModel.fromJson(item));
       }
+      heartStatusList = List<bool>.filled(productList.length, false);
       setState(() {}); // 상태 갱신
     } catch (error) {
       print('Error loading product list: $error');
@@ -61,7 +63,7 @@ class _LikesMainState extends State<LikesMain> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BackAppBar(text: 'Bookmark'), // BackAppBar를 사용하여 AppBar 내용을 정의
+            BackAppBar(text: 'Bookmark'),
           ],
         ),
       ),
@@ -71,36 +73,63 @@ class _LikesMainState extends State<LikesMain> {
             children: [
               SizedBox(width: screenSize.width * 0.03),
               ContentButton(
-                  buttonText: 'activity',
-                  onPressed: () {
-                    pressed = !pressed;
-                  }),
+                buttonText: 'activity',
+                onPressed: () {
+                  _loadProductList('assets/activity.json');
+                  setState(() {
+                    activeButton = 'activity'; // 활성 버튼 변경
+                    activityPage = true;
+                    print(1);
+                  });
+                },
+                isActive: activeButton == 'activity', // 활성 상태 체크
+              ),
               ContentButton(
-                  buttonText: 'video',
-                  onPressed: () {
-                    pressed = !pressed;
-                  }),
+                buttonText: 'video',
+                onPressed: () {
+                  _loadProductList('assets/lists.json');
+                  setState(() {
+                    activeButton = 'video'; // 활성 버튼 변경
+                    activityPage = false;
+                    print(2);
+                  });
+                },
+                isActive: activeButton == 'video', // 활성 상태 체크
+              ),
               ContentButton(
-                  buttonText: 'music',
-                  onPressed: () {
-                    pressed = !pressed;
-                  }),
+                buttonText: 'music',
+                onPressed: () {
+                  _loadProductList('assets/music_lists.json');
+                  setState(() {
+                    activeButton = 'music'; // 활성 버튼 변경
+                    activityPage = false;
+                    print(3);
+                  });
+                },
+                isActive: activeButton == 'music', // 활성 상태 체크
+              ),
               ContentButton(
-                  buttonText: 'book',
-                  onPressed: () {
-                    pressed = !pressed;
-                  })
+                buttonText: 'book',
+                onPressed: () {
+                  _loadProductList('assets/book_lists.json');
+                  setState(() {
+                    activeButton = 'book'; // 활성 버튼 변경
+                    activityPage = false;
+                    print(4);
+                  });
+                },
+                isActive: activeButton == 'book', // 활성 상태 체크
+              ),
             ],
           ),
           Expanded(
-            child: _postListView(),
+            child: activityPage ? _activitypostListView() : _postListView(),
           ),
         ],
       ),
     );
   }
 
-  // 게시물 리스트 위젯
   Widget _postListView() {
     if (productList.isEmpty) {
       return Center(
@@ -113,7 +142,7 @@ class _LikesMainState extends State<LikesMain> {
         itemBuilder: (context, index) {
           return ChangeNotifierProvider<ProductModel>.value(
             value: productList[index],
-            child: _postCard(context),
+            child: _postCard(context, index),
           );
         },
         separatorBuilder: (context, i) {
@@ -125,11 +154,78 @@ class _LikesMainState extends State<LikesMain> {
     }
   }
 
-  // 게시물 리스트에서 게시물 하나에 대한 위젯
-  Widget _postCard(BuildContext context) {
+  Widget _activitypostListView() {
+    if (productList.isEmpty) {
+      return Center(
+        child: Text('No products available'),
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Column(
+              children: [
+                Text(
+                  'Take action right now!',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22.16,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    height: 2,
+                  ),
+                ),
+                Text(
+                  'special recipes to make you feel happy ',
+                  style: TextStyle(
+                    color: Color(0xFF757575),
+                    fontSize: 12.16,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w400,
+                    height: 2,
+                  ),
+                ),
+                SizedBox(height: 15)
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: (productList.length + 1) ~/
+                  2, // 한 줄에 두 개의 아이템을 표시하기 위해 itemCount를 조정합니다.
+              itemBuilder: (context, rowIndex) {
+                return Row(
+                  children: [
+                    // 첫 번째 아이템일 경우 CoffeeUpgrade 위젯을 반환합니다.
+                    ChangeNotifierProvider<ProductModel>.value(
+                      value: productList[
+                          rowIndex * 2], // rowIndex에 맞는 인덱스를 계산하여 제품을 가져옵니다.
+                      child: _activitypostCard(context),
+                    ),
+                    // 두 번째 아이템일 경우, 리스트의 끝을 넘어가지 않도록 체크합니다.
+                    if ((rowIndex * 2 + 1) < productList.length)
+                      ChangeNotifierProvider<ProductModel>.value(
+                        value: productList[rowIndex * 2 +
+                            1], // rowIndex에 맞는 인덱스를 계산하여 제품을 가져옵니다.
+                        child: _activitypostCard(context),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      );
+    }
+  }
+
+  Widget _activitypostCard(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Consumer<ProductModel>(
-      builder: (context, productList, child) {
+      builder: (context, product, child) {
         double paddingValue = MediaQuery.of(context).size.width * 0.042;
         return InkWell(
           onTap: () {
@@ -139,7 +235,11 @@ class _LikesMainState extends State<LikesMain> {
                 transitionDuration: const Duration(milliseconds: 400),
                 pageBuilder: (context, animation, secondaryAnimation) =>
                     ContentDetailPage(
-                  contentId: 1,
+                  contentId: product.contentId,
+                  image: product.imageLink,
+                  text: product.title,
+                  description: product.description,
+                  link: product.youtubeLink,
                 ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
@@ -150,35 +250,59 @@ class _LikesMainState extends State<LikesMain> {
 
                   return SlideTransition(
                     position: previousPageOffsetAnimation,
-                    child: ContentDetailPage(
-                      contentId: 1,
-                    ),
+                    child: child,
                   );
                 },
               ),
             );
           },
           child: Padding(
-            padding: EdgeInsets.all(
-              paddingValue,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+            padding: EdgeInsets.symmetric(horizontal: paddingValue),
+            child: Stack(
+              children: [
                 Container(
-                  width: screenSize.width * 0.36,
-                  height: screenSize.height * 0.1,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1.0,
+                  width: screenSize.width * 0.4,
+                  height: screenSize.height * 0.23,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFF212121),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                  ),
-                  child: Image.asset(
-                    "assets/images/loading_logo.png",
+                    shadows: [
+                      BoxShadow(
+                        color: Color(0x3F000000),
+                        blurRadius: 4,
+                        offset: Offset(0, 4),
+                        spreadRadius: 0,
+                      )
+                    ],
                   ),
                 ),
-                _buildProductDetails(context, productList),
+                Container(
+                  width: screenSize.width * 0.38,
+                  height: screenSize.height * 0.18,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                      ),
+                      child: Image.network(
+                        // 네트워크 이미지 로드
+                        product.imageLink,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          // 이미지 로드 실패 시 기본 이미지 반환
+                          return Image.asset(
+                            'assets/images/loading_logo.png',
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 155.0),
+                  child: _activitybuildProductDetails(context, product),
+                ),
               ],
             ),
           ),
@@ -187,7 +311,96 @@ class _LikesMainState extends State<LikesMain> {
     );
   }
 
-  Widget _buildProductDetails(BuildContext context, ProductModel productList) {
+  Widget _activitybuildProductTexts(ProductModel productList) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Padding(
+      padding: EdgeInsets.fromLTRB(screenSize.width * 0.01, 0, 0, 0),
+      child: Container(
+        width: screenSize.width * 0.35,
+        height: screenSize.width * 0.03,
+        child: Text(
+          productList.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w500,
+            fontSize: 11,
+            color: Color(0xFFFFFFFF),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _activitybuildProductDetails(
+      BuildContext context, ProductModel productList) {
+    double height = MediaQuery.of(context).size.width * 0.2;
+    return Expanded(
+      child: SizedBox(
+        height: height,
+        child: _activitybuildProductTexts(productList),
+      ),
+    );
+  }
+
+  Widget _postCard(BuildContext context, int index) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Consumer<ProductModel>(
+      builder: (context, product, child) {
+        double paddingValue = MediaQuery.of(context).size.width * 0.042;
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ContentDetailPage(
+                  contentId: product.contentId,
+                  image: product.imageLink,
+                  text: product.title,
+                  description: product.description,
+                  link: product.youtubeLink,
+                ),
+              ),
+            );
+          },
+          child: Padding(
+            padding: EdgeInsets.all(paddingValue),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    width: screenSize.width * 0.36,
+                    height: screenSize.height * 0.1,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1.0,
+                      ),
+                    ),
+                    child: Image.network(
+                      // 네트워크 이미지 로드
+                      product.imageLink,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        // 이미지 로드 실패 시 기본 이미지 반환
+                        return Image.asset(
+                          'assets/images/loading_logo.png',
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    )),
+                _buildProductDetails(context, product, index),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildProductDetails(
+      BuildContext context, ProductModel product, int index) {
     double height = MediaQuery.of(context).size.width * 0.28;
     return Expanded(
       child: SizedBox(
@@ -196,14 +409,15 @@ class _LikesMainState extends State<LikesMain> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildProductTexts(productList),
+            _buildProductTexts(context, product, index),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildProductTexts(ProductModel productList) {
+  Widget _buildProductTexts(
+      BuildContext context, ProductModel product, int index) {
     Size screenSize = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.fromLTRB(screenSize.width * 0.07, 0, 0, 0),
@@ -215,7 +429,7 @@ class _LikesMainState extends State<LikesMain> {
               Container(
                 width: screenSize.width * 0.35,
                 child: Text(
-                  productList.title,
+                  product.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -226,12 +440,24 @@ class _LikesMainState extends State<LikesMain> {
                   ),
                 ),
               ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.favorite_outline))
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    heartStatusList[index] = !heartStatusList[index];
+                  });
+                },
+                icon: Icon(
+                  heartStatusList[index]
+                      ? Icons.favorite
+                      : Icons.favorite_outline,
+                  color: heartStatusList[index] ? Colors.red : null,
+                ),
+              )
             ],
           ),
           SizedBox(height: screenSize.height * 0.01),
           Text(
-            productList.description,
+            product.description,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
@@ -250,12 +476,13 @@ class _LikesMainState extends State<LikesMain> {
 class ContentButton extends StatefulWidget {
   final String buttonText;
   final VoidCallback onPressed;
-
-  const ContentButton({
-    Key? key,
-    required this.buttonText,
-    required this.onPressed,
-  }) : super(key: key);
+  final bool isActive;
+  const ContentButton(
+      {Key? key,
+      required this.buttonText,
+      required this.onPressed,
+      required this.isActive})
+      : super(key: key);
 
   @override
   _ContentButtonState createState() => _ContentButtonState();
@@ -278,7 +505,8 @@ class _ContentButtonState extends State<ContentButton> {
           widget.onPressed();
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: pressed ? Color(0xFFD9D9D9) : Color(0xFFFAF1F1),
+          backgroundColor:
+              widget.isActive ? Color(0xFFFAF1F1) : Color(0xFFD9D9D9),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(color: Colors.black, width: 1),
