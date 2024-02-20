@@ -47,20 +47,35 @@ samples, guidance on mobile development, and a full API reference.
 
 '''
 app
+
 ├── assets
+
 │ ├── fonts
+
 │ └── images
+
 ├── lib
+
 │ ├── constants
+
 │ ├── models
+
 │ ├── providers
+
 │ └── screens
+
 │ ├── auth
+
 │ ├── diary
+
 │ ├── likes
+
 │ ├── location
+
 │ ├── recommended
+
 │ └── settings
+
 └── widgets
 '''
 
