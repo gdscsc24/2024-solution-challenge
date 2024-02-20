@@ -33,74 +33,24 @@ samples, guidance on mobile development, and a full API reference.
 - Google sign in : 6.2.1
 
 ### Architecture
-'''
-├── assets  
-│       ├── fonts
-│       └── images
-│
-├── lib 
-        ├── constants
-        ├── models
-        ├── providers
-        ├── screens
-        │       ├── auth
-        │       ├── diary
-        │       ├── likes
-        │       ├── location
-        │       ├── recommended
-        │       └── settings
-        ├── widgets
-        └── main.dart
-
-        app
-    ├── common
-    │   ├── util
-    │   └── values
-    │       └── styles
-    ├── data
-    │   ├── enums
-    │   ├── errors
+'''    
+    ├── assets
+    │   ├── fonts
+    │   └── images
+    │       
+    ├── lib
+    │   ├── constants
     │   ├── models
-    │   └── providers
-    ├── modules
-    │   ├── event
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── home
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── login
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── map
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── map_detail
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── register
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── reservation_list
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── splash
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   ├── walk_track
-    │   │   ├── bindings
-    │   │   ├── controllers
-    │   │   └── views
-    │   └── widgets
-    └── routes
+    │   ├── providers
+    │   └── screens
+    │           ├── auth
+    │           ├── diary
+    │           ├── likes
+    │           ├── location
+    │           ├── recommended 
+    │           └── settings
+    ├── widgets
+    └── main.dart
 '''
 
 
