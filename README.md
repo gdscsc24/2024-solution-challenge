@@ -1,9 +1,9 @@
 # Moodista
-('assets/images/loading_logo.png')
+![Logo]('assets/images/loading_logo.png')
 Moodista is a mental health self-care app for modern people.
 
  **Diary-based sentiment analysis** provides customized content.
--Pursue healthy life and well-being for all age groups by supporting connections with communities and treatment centers.
+Pursue healthy life and well-being for all age groups by supporting connections with communities and treatment centers.
 
 ## Members
 
@@ -19,6 +19,29 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## Front-End
+### Tech Stack
+- Futter : 3.16.9
+- Dart : 3.2.6
+- Google maps flutter : 2.5.3
+- Google sign in : 6.2.1
+
+### Architecture
+'''
+lib 
+    ├── constants
+    ├── models
+    ├── providers
+    ├── screens
+    ├── widgets
+    ├── main.dart
+    
+
+
+
+## Back-End
 
 ## AI
 
