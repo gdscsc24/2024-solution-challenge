@@ -79,6 +79,7 @@ flutter:
     - assets/lists.json
     - assets/book_lists.json
     - assets/music_lists.json
+    - assets/activity.json
     
   #   - images/a_dot_ham.jpeg
 
