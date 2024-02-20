@@ -1,7 +1,8 @@
 # Moodista
 <div align="center">
-  <img src="assets/images/loading_logo.png" alt="Logo" width="200"/>
+  <img src="assets/images/loading_logo.png" alt="Logo" width="250"/>
 </div>
+
 
 Moodista ☕️ is a mental health self-care app for modern people.
 
