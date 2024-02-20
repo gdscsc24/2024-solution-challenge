@@ -1,0 +1,26 @@
+[
+    {
+        "actionId": 1,
+        "title": "Spend 10 Minutes Basking in the Sun",
+        "description": "Natural sunlight is a primary source of Vitamin D, which can help improve mood.",
+        "image_link": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
+    },
+    {
+        "actionId": 2,
+        "title": "Run at Full Speed for 2 Minutes",
+        "description": "Short, intense bursts of exercise can help release stress and produce endorphins, improving your mood.",
+        "image_link": "https://www.sundried.com/cdn/shop/articles/c27ddca5b9550a6940dfef2581b6c38d.jpg?v=1557744738"
+    },
+    {
+        "actionId": 3,
+        "title": "List 3 Things You Want to Do",
+        "description": "Clarifying your goals and taking the first step towards achieving them can be very satisfying.",
+        "image_link": "https://media.wired.com/photos/5a0a38c1d07f6824ff44221b/master/w_2560%2Cc_limit/twitterlists-TA.jpg"
+    },
+    {
+        "actionId": 4,
+        "title": "Meditate for 5 Minutes",
+        "description": "Meditation can calm your mind and reduce stress. It's effective even when practiced for short durations.",
+        "image_link": "https://daveasprey.com/wp-content/uploads/2015/03/meditation_sun.jpg"
+    }
+]
