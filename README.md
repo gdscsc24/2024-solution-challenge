@@ -1,5 +1,8 @@
 # Moodista
-![Logo](assets/images/loading_logo.png)
+<div align="center">
+  <img src="assets/images/loading_logo.png" alt="Logo" width="200"/>
+</div>
+
 Moodista is a mental health self-care app for modern people.
 
  **Diary-based sentiment analysis** provides customized content.
