@@ -95,7 +95,8 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     final TextEditingController _textController = TextEditingController();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
-        padding: EdgeInsets.only(left: screenSize.width * 0.08),
+        padding: EdgeInsets.only(
+            left: screenSize.width * 0.08, top: screenSize.height * 0.05),
         child: Container(
           width: screenSize.width * 0.53,
           height: screenSize.height * 0.08,
