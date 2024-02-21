@@ -1,9 +1,16 @@
-# Moodista ☕️
+# 2024 Solution Challenge : Moodista ☕️
+
+> GDSC GIST
+> 2024.1.16 ~ 2024.2.21
+> [Dev Log](https://gossamer-galaxy-3c3.notion.site/1be5d86e385746ca92b0c123db5f6fec?v=66e6b96703324838812d111df1860a57&pvs=4)
+
 <div align="center">
   <img src="assets/images/loading_logo.png" alt="Logo" width="250"/>
 </div>
 
 <br>
+
+## Project Introduction
 
 Moodista is a mental health self-care app for modern people.
 
