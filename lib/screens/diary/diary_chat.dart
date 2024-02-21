@@ -61,42 +61,46 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: BackAppBarNone(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.03),
-              child: Text(
-                'Which event caused your feelings?',
-                style: const TextStyle(
-                  fontFamily: 'Comfortaa',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: screenSize.height * 0.03),
+                child: Text(
+                  'Which event caused your feelings?',
+                  style: const TextStyle(
+                    fontFamily: 'Comfortaa',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            Column(
-              children: [
-                for (var i = 0; i < eventTextList.length; i++)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(eventTextList[i].length, (index) {
-                      return EventButton(
-                        event: eventTextList[i][index],
-                        color: eventColorList[i][index], // 이벤트 색상 적용
-                        onPressed1: () {
-                          setState(() {
-                            chat = true;
-                          });
-                          print('Selected event: ${eventTextList[i][index]}');
-                        },
-                      );
-                    }),
-                  ),
-                if (chat) ChatWidget()
-              ],
-            ),
-          ],
+              Column(
+                children: [
+                  for (var i = 0; i < eventTextList.length; i++)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(eventTextList[i].length, (index) {
+                        return EventButton(
+                          event: eventTextList[i][index],
+                          color: eventColorList[i][index], // 이벤트 색상 적용
+                          onPressed1: () {
+                            setState(() {
+                              chat = true;
+                            });
+                            print('Selected event: ${eventTextList[i][index]}');
+                          },
+                        );
+                      }),
+                    ),
+                  if (chat) ChatWidget()
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
+            ],
+          ),
         ));
   }
 
@@ -105,7 +109,10 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     Size screenSize = MediaQuery.of(context).size;
 
     final TextEditingController _textController = TextEditingController();
-    return SingleChildScrollView(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Padding(
           padding: EdgeInsets.only(
@@ -130,7 +137,6 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
                   decorationColor: Color(0xFFE9E4D1), // 밑줄 색상 지정
                   decorationThickness: 2.0, // 밑줄 두께 지정
                 ),
-
               ),
             ),
           ),
@@ -170,9 +176,6 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
                 decorationThickness: 2.0,
               ),
               maxLines: null,
-              onEditingComplete: () {
-                FocusScope.of(context).unfocus();
-              },
             ),
           ),
         ),
