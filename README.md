@@ -20,9 +20,9 @@
 
 ## Our Goal
 
-- **Moodista** supports the UN's Sustainable Development Goal (SDG) 3, specifically Target 3.4, which aims to lower deaths from non-communicable diseases and enhance mental health. 
-- **Moodista** makes mental health care more accessible, breaking down the barriers that make it harder to get than traditional medical treatments. 
-- **Moodista** offers personalized mental health services, making it easier for users to manage their mental health challenges.
+- **Moodista** supports the UN SDG 3; Ensure healthy lives and promote well-being for all at all ages!
+- **Moodista** makes mental health care more accessible; Break down the barriers to get traditional medical treatments!
+- **Moodista** offers personalized mental health services; Make it easier for users to manage their mental health challenges!
 
 <br>
 
