@@ -36,6 +36,11 @@ samples, guidance on mobile development, and a full API reference.
 - play 'flutter pub get' in terminal to install environments
 - Start debugging in 'main.dart' file
 
+<div align="center">
+  <img src="assets/images/moodista video.gif" alt="Logo" width="250"/>
+</div>
+
+
 ## Front-End
 
 ### Tech Stack
