@@ -11,6 +11,7 @@ import 'package:rest_note/screens/recommended/content_detail.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class RecommendedMain extends StatefulWidget {
   @override
@@ -18,6 +19,46 @@ class RecommendedMain extends StatefulWidget {
 }
 
 class _RecommendedMainState extends State<RecommendedMain> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<int?> _getUserMood() async {
+    final userEmail = FirebaseAuth.instance.currentUser?.email;
+    final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    final documentSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userEmail)
+        .collection('datas')
+        .doc(formattedDate)
+        .get();
+
+    if (documentSnapshot.exists) {
+      final mood = documentSnapshot.data()?['mood'];
+      if (mood is int) {
+        // mood가 int 타입인지 확인
+        return mood;
+      }
+    }
+    return null; // mood 값이 없거나 int 타입이 아닐 때 null 반환
+  }
+
+  Future<String> _getUserNickname() async {
+    final userEmail = _auth.currentUser?.email; // 현재 로그인한 사용자의 이메일 가져오기
+    if (userEmail == null) return 'defaultNickname'; // 사용자 이메일이 없다면 기본 닉네임 반환
+
+    try {
+      final userDoc = await _firestore.collection('users').doc(userEmail).get();
+      if (userDoc.exists) {
+        return userDoc.data()?['nickname'] ??
+            'defaultNickname'; // 닉네임이 없을 경우 기본값 반환
+      }
+      return 'defaultNickname'; // 문서가 존재하지 않을 경우 기본값 반환
+    } catch (e) {
+      print('Error getting user nickname: $e');
+      return 'defaultNickname'; // 오류 발생 시 기본값 반환
+    }
+  }
+
   late Future<List<ProductModel>> futureProducts;
   final List<ProductModel> productList = [];
 
@@ -451,8 +492,6 @@ class _RecommendedMainState extends State<RecommendedMain> {
 
   Widget _CoffeeUpgrade() {
     Size screenSize = MediaQuery.of(context).size;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     final List<String> imageUrls = [
       'assets/images/Espresso_Romano.png',
       'assets/images/Hazelnut_Americano.png',
@@ -469,18 +508,15 @@ class _RecommendedMainState extends State<RecommendedMain> {
       '4 pumps of fragrant hazelnut syrup',
       'Smooth milk and sweet vanilla scent'
     ];
-    return FutureBuilder<DocumentSnapshot>(
-      future:
-          _firestore.collection('users').doc(_auth.currentUser?.email).get(),
+    return FutureBuilder<List<dynamic>>(
+      future: Future.wait([_getUserMood(), _getUserNickname()]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         }
 
-        var userNickname = 'defaultNickname';
-        if (snapshot.data != null && snapshot.data!.exists) {
-          userNickname = snapshot.data!.get('nickname');
-        }
+        final int moodIndex = snapshot.data?[0] ?? 0;
+        final String userNickname = snapshot.data?[1] ?? 'defaultNickname';
 
         return Padding(
           padding: EdgeInsets.fromLTRB(
@@ -518,14 +554,14 @@ class _RecommendedMainState extends State<RecommendedMain> {
                 Row(
                   children: [
                     SizedBox(width: screenSize.width * 0.05),
-                    Image.asset('assets/images/Espresso_Romano.png',
+                    Image.asset(imageUrls[moodIndex],
                         width: screenSize.width * 0.27),
                     SizedBox(width: screenSize.width * 0.035),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Espresso Romano',
+                          textList[moodIndex],
                           style: TextStyle(
                             fontFamily: 'Comfortaa',
                             fontWeight: FontWeight.w700,
@@ -543,7 +579,7 @@ class _RecommendedMainState extends State<RecommendedMain> {
                           ),
                         ),
                         Text(
-                          "\n refreshing taste from sugar and lemon",
+                          "\n " + textdetailList[moodIndex],
                           style: TextStyle(
                             fontFamily: 'Comfortaa',
                             fontWeight: FontWeight.w700,

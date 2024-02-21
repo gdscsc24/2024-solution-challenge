@@ -41,7 +41,7 @@ class _DiaryMakingPageState extends State<DiaryMakingPage> {
   Future<void> fetchVideoInfo(
       {required String email, required String date}) async {
     final url = Uri.parse(
-        'https://asia-northeast3-rest-diary-c01f6.cloudfunctions.net/main'); // 여기에 Cloud Function의 URL을 입력하세요.
+        'https://us-central1-rest-diary-c01f6.cloudfunctions.net/main'); // 여기에 Cloud Function의 URL을 입력하세요.
     final response = await http.post(url,
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({"email": email, "date": date}));

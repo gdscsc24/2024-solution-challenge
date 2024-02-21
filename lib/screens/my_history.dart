@@ -1,8 +1,10 @@
+import 'dart:js_interop';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-
 import 'package:rest_note/widgets/back_appbar.dart';
-
 import 'package:fl_chart/fl_chart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyHistoryPage extends StatefulWidget {
   MyHistoryPage({super.key});
@@ -11,6 +13,65 @@ class MyHistoryPage extends StatefulWidget {
 }
 
 class _MyHistoryPageState extends State<MyHistoryPage> {
+  int num_Espresso = 0;
+  int num_Americano = 0;
+  int num_Macchiato = 0;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String percentage_espresso = "0%";
+  String percentage_americano = "0%";
+  String percentage_macchiato = "0%";
+
+  @override
+  void initState() {
+    super.initState();
+    countMoods();
+  }
+
+  Future<void> countMoods() async {
+    final User? user = _auth.currentUser;
+    final String userEmail = user?.email ?? "defaultEmail@example.com";
+    final String currentYearMonth =
+        DateFormat('yyyy-MM').format(DateTime.now());
+
+    final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userEmail)
+        .collection('datas')
+        .where(FieldPath.documentId,
+            isGreaterThanOrEqualTo: "$currentYearMonth-01")
+        .where(FieldPath.documentId,
+            isLessThanOrEqualTo: "$currentYearMonth-31")
+        .get();
+
+    for (var doc in querySnapshot.docs) {
+      final data = doc.data() as Map<String, dynamic>;
+      switch (data['mood']) {
+        case 0:
+          num_Espresso++;
+          break;
+        case 1:
+          num_Americano++;
+          break;
+        case 2:
+          num_Macchiato++;
+          break;
+      }
+    }
+    int total = num_Espresso + num_Americano + num_Macchiato;
+    if (total > 0) {
+      setState(() {
+        percentage_espresso =
+            ((num_Espresso / total) * 100).toStringAsFixed(1) + "%";
+        percentage_americano =
+            ((num_Americano / total) * 100).toStringAsFixed(1) + "%";
+        percentage_macchiato =
+            ((num_Macchiato / total) * 100).toStringAsFixed(1) + "%";
+      });
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -55,17 +116,17 @@ class _MyHistoryPageState extends State<MyHistoryPage> {
                               PieChartData(
                                 sections: [
                                   PieChartSectionData(
-                                      value: 30,
+                                      value: num_Americano.toDouble(),
                                       color: Color(0xFAF1F1),
                                       radius: screenSize.width * 0.08,
                                       title: ''),
                                   PieChartSectionData(
-                                      value: 20,
+                                      value: num_Macchiato.toDouble(),
                                       color: Color(0xFFD6E4F0),
                                       radius: screenSize.width * 0.08,
                                       title: ''),
                                   PieChartSectionData(
-                                    value: 50,
+                                    value: num_Espresso.toDouble(),
                                     color: Color(0xFFE0E0E0),
                                     radius: screenSize.width * 0.08,
                                     title: '',
@@ -77,28 +138,28 @@ class _MyHistoryPageState extends State<MyHistoryPage> {
                         ),
                       ],
                     ),
-                    const Column(
+                    Column(
                       children: [
                         MoodCoffee(
                           image: 'assets/images/Espresso.png',
                           coffeetext: 'Espresso',
                           fontcolor: Color(0xFFE0E0E0),
                           borderColor: Color(0xFF757575),
-                          percentage: '50%',
+                          percentage: percentage_espresso,
                         ),
                         MoodCoffee(
                           image: 'assets/images/Americano.png',
                           coffeetext: 'Americano',
                           fontcolor: Color(0xFFFAF1F1),
                           borderColor: Color(0xFF8E4917),
-                          percentage: '30%',
+                          percentage: percentage_americano,
                         ),
                         MoodCoffee(
                           image: 'assets/images/Macchiato.png',
                           coffeetext: 'Macchiato',
                           fontcolor: Color(0xFFD6E4F0),
                           borderColor: Color(0xFF333258),
-                          percentage: '20%',
+                          percentage: percentage_macchiato,
                         ),
                       ],
                     )
