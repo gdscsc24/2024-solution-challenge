@@ -83,6 +83,57 @@ class _RecommendedMainState extends State<RecommendedMain> {
     super.dispose();
   }
 
+  Future<void> _loadRecommendedVideosOrFallbackToJson() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final String userEmail = user?.email ?? '';
+    final String formattedDate =
+        DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+    if (userEmail.isEmpty) {
+      print('No user email found');
+      _loadProductList('assets/lists.json');
+      return;
+    }
+
+    try {
+      final QuerySnapshot recommendedSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userEmail)
+          .collection('datas')
+          .doc(formattedDate)
+          .collection('recommended')
+          .get();
+
+      if (recommendedSnapshot.docs.isEmpty) {
+        _loadProductList('assets/lists.json');
+        return;
+      }
+
+      productList.clear();
+
+      int contentIdCounter = 1; // contentId를 순차적으로 할당하기 위한 카운터
+      for (var doc in recommendedSnapshot.docs) {
+        final data = doc.data() as Map<String, dynamic>;
+        productList.add(ProductModel(
+          contentId:
+              contentIdCounter, // Firestore에서는 contentId를 별도로 관리하지 않으므로, 순차적인 번호를 할당
+          title: data['title'] as String? ?? 'Default Title',
+          description: data['description'] as String? ?? 'Default Description',
+          imageLink: data['image_link'] as String? ??
+              'https://example.com/default_image.jpg',
+          youtubeLink:
+              data['youtube_link'] as String? ?? 'https://youtube.com/default',
+        ));
+        contentIdCounter++;
+      }
+
+      setState(() {});
+    } catch (e) {
+      print('Error loading recommended videos: $e');
+      _loadProductList('assets/lists.json');
+    }
+  }
+
   Future<void> _loadProductList(String jsonFileName) async {
     try {
       // JSON 파일을 읽어옴
@@ -134,11 +185,10 @@ class _RecommendedMainState extends State<RecommendedMain> {
               ContentButton(
                 buttonText: 'video',
                 onPressed: () {
-                  _loadProductList('assets/lists.json');
+                  _loadRecommendedVideosOrFallbackToJson();
                   setState(() {
                     activeButton = 'video'; // 활성 버튼 변경
                     activityPage = false;
-                    print(2);
                   });
                 },
                 isActive: activeButton == 'video', // 활성 상태 체크
@@ -146,7 +196,7 @@ class _RecommendedMainState extends State<RecommendedMain> {
               ContentButton(
                 buttonText: 'music',
                 onPressed: () {
-                  _loadProductList('assets/music_lists.json');
+                  _loadRecommendedVideosOrFallbackToJson();
                   setState(() {
                     activeButton = 'music'; // 활성 버튼 변경
                     activityPage = false;
