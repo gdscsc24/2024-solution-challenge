@@ -12,22 +12,17 @@
 
 ## Project Introduction
 
-**Moodista** is a mental health self-care app for modern people.
-
-Diary-based sentiment analysis :diary: provides you with customized contents!
-
-Pursue healthy life and well-being for all age groups by supporting connections with communities and treatment centers. 
+- **Moodista** is a mental health self-care app for people!
+- Diary-based sentiment analysis 📝 provides you with customized contents and solutions!
+- Support healthy life and well-being for people 🍀 by connecting them to counseling centers and treatment facilities!
 
 <br>
 
-## Members
+## Our Goal
 
-| Team Member   | Role           |
-|---------------|----------------|
-| Lee Jaehee    | AI / Design    |
-| Ji Yuna       | Front-end      |
-| Choi Wonhyeok | Back-end       |
-| Jeon Wooseok  | AI             |
+- **Moodista** supports the UN's Sustainable Development Goal (SDG) 3, specifically Target 3.4, which aims to lower deaths from non-communicable diseases and enhance mental health. 
+- **Moodista** makes mental health care more accessible, breaking down the barriers that make it harder to get than traditional medical treatments. 
+- **Moodista** offers personalized mental health services, making it easier for users to manage their mental health challenges.
 
 <br>
 
@@ -130,3 +125,12 @@ The model is trained on emotion entries collected from the GoEmotions dataset, c
 The sentiment classification model is deployed on resource-constrained devices such as mobile phones or edge devices using TensorFlow Lite (TFLite) format, ensuring efficient execution with low latency and reduced memory footprint.
 
 For more information on customizing models and datasets, refer to the [online documentation](https://developers.google.com/mediapipe/solutions/customization/text_classifier) and [Kaggle page](https://www.kaggle.com/datasets/shivamb/go-emotions-google-emotions-dataset).
+
+## Contributers
+
+| Team Member   | Role           |
+|---------------|----------------|
+| Lee Jaehee    | AI / Design    |
+| Ji Yuna       | Front-end      |
+| Choi Wonhyeok | Back-end       |
+| Jeon Wooseok  | AI             |
