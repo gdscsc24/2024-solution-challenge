@@ -30,7 +30,7 @@
 
 <br>
 
-## Getting Started
+## Getting Started!
 
 This project is a starting point for a Flutter application.
 
@@ -45,7 +45,7 @@ samples, guidance on mobile development, and a full API reference.
 
 <br>
 
-### Implementation of App
+### Demo
 - install Flutter and Simulator
 - play 'flutter pub get' in terminal to install environments
 - Start debugging in 'main.dart' file
