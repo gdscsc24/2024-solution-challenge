@@ -20,8 +20,8 @@
 
 ## Our Goal
 
-<div align="center">
-  <img src="assets/images/unsdg3.jpg" alt="Logo" width="250"/>
+<div align="left">
+  <img src="assets/images/unsdg3.jpg" alt="Logo" width="400"/>
 </div>
 
 - **Moodista** supports the UN SDG 3; Ensure healthy lives and promote well-being for all at all ages!
