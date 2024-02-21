@@ -59,6 +59,7 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: BackAppBarNone(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -102,89 +103,99 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
   Widget ChatWidget() {
     @override
     Size screenSize = MediaQuery.of(context).size;
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Padding(
-        padding: EdgeInsets.only(
-            left: screenSize.width * 0.08, top: screenSize.height * 0.05),
-        child: Container(
-          width: screenSize.width * 0.53,
-          height: screenSize.height * 0.08,
-          decoration: BoxDecoration(
-              color: Color(0xFFFFFBF2), borderRadius: BorderRadius.circular(5)),
-          padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.03),
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: const TextSpan(
-              text: 'Tell me more about your emotion.',
-              style: TextStyle(
+
+    final TextEditingController _textController = TextEditingController();
+    return SingleChildScrollView(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Padding(
+          padding: EdgeInsets.only(
+              left: screenSize.width * 0.08, top: screenSize.height * 0.05),
+          child: Container(
+            width: screenSize.width * 0.53,
+            height: screenSize.height * 0.08,
+            decoration: BoxDecoration(
+                color: Color(0xFFFFFBF2),
+                borderRadius: BorderRadius.circular(5)),
+            padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.03),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(
+                text: 'Tell me more about your emotion.',
+                style: TextStyle(
+                  fontFamily: 'Rubik',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF403E39),
+                  decoration: TextDecoration.underline, // 밑줄 추가
+                  decorationColor: Color(0xFFE9E4D1), // 밑줄 색상 지정
+                  decorationThickness: 2.0, // 밑줄 두께 지정
+                ),
+
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: screenSize.height * 0.05),
+        Padding(
+          padding: EdgeInsets.only(left: screenSize.width * 0.31),
+          child: Container(
+            width: screenSize.width * 0.63,
+            child: TextField(
+              controller: _textController,
+              decoration: InputDecoration(
+                filled: true, // 배경색 적용
+                fillColor: Color(0xFFFFFBF2), // 배경색 지정
+                hintText: 'Write here...',
+                hintStyle: const TextStyle(
+                  fontFamily: 'Rubik',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF403E39),
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                border: OutlineInputBorder(
+                  borderRadius:
+                      BorderRadius.circular(10.0), // 텍스트 필드의 모서리 둥글기 설정
+                  borderSide: BorderSide.none, // 테두리 제거
+                ),
+              ),
+              style: const TextStyle(
                 fontFamily: 'Rubik',
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 color: Color(0xFF403E39),
-                decoration: TextDecoration.underline, // 밑줄 추가
-                decorationColor: Color(0xFFE9E4D1), // 밑줄 색상 지정
-                decorationThickness: 2.0, // 밑줄 두께 지정
+                decoration: TextDecoration.underline,
+                decorationColor: Color(0xFFE9E4D1),
+                decorationThickness: 2.0,
               ),
+              maxLines: null,
+              onEditingComplete: () {
+                FocusScope.of(context).unfocus();
+              },
             ),
           ),
         ),
-      ),
-      SizedBox(height: screenSize.height * 0.05),
-      Padding(
-        padding: EdgeInsets.only(left: screenSize.width * 0.31),
-        child: Container(
-          width: screenSize.width * 0.63,
-          child: TextField(
-            controller: _textController,
-            decoration: InputDecoration(
-              filled: true, // 배경색 적용
-              fillColor: Color(0xFFFFFBF2), // 배경색 지정
-              hintText: 'Write here...',
-              hintStyle: const TextStyle(
-                fontFamily: 'Rubik',
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF403E39),
-              ),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0), // 텍스트 필드의 모서리 둥글기 설정
-                borderSide: BorderSide.none, // 테두리 제거
-              ),
-            ),
-            style: const TextStyle(
-              fontFamily: 'Rubik',
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF403E39),
-              decoration: TextDecoration.underline,
-              decorationColor: Color(0xFFE9E4D1),
-              decorationThickness: 2.0,
-            ),
-            maxLines: null,
+        SizedBox(height: screenSize.height * 0.01),
+        Row(children: [
+          SizedBox(width: screenSize.width * 0.74),
+          ChatButton(
+            text: 'Done',
+            onPressed: () {
+              _saveTextToFirestore().then((_) {
+                // 성공적으로 저장 후에 다음 페이지로 이동
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DiaryMakingPage()),
+                );
+              }).catchError((error) {
+                // 오류 처리...
+              });
+            },
           ),
-        ),
-      ),
-      SizedBox(height: screenSize.height * 0.01),
-      Row(children: [
-        SizedBox(width: screenSize.width * 0.74),
-        ChatButton(
-          text: 'Done',
-          onPressed: () {
-            _saveTextToFirestore().then((_) {
-              // 성공적으로 저장 후에 다음 페이지로 이동
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DiaryMakingPage()),
-              );
-            }).catchError((error) {
-              // 오류 처리...
-            });
-          },
-        ),
+        ]),
       ]),
-    ]);
+    );
   }
 }
 
