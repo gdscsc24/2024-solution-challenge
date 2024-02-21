@@ -9,6 +9,8 @@ Diary-based sentiment analysis provides you with customized contents!
 
 Pursue healthy life and well-being for all age groups by supporting connections with communities and treatment centers. 
 
+<br>
+
 ## Members
 
 | Team Member   | Role           |
@@ -17,6 +19,8 @@ Pursue healthy life and well-being for all age groups by supporting connections 
 | Ji Yuna       | Front-end      |
 | Choi Wonhyeok | Back-end       |
 | Jeon Wooseok  | AI             |
+
+<br>
 
 ## Getting Started
 
@@ -31,6 +35,8 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+<br>
+
 ### Implementation of App
 - install Flutter and Simulator
 - play 'flutter pub get' in terminal to install environments
@@ -40,6 +46,7 @@ samples, guidance on mobile development, and a full API reference.
   <img src="assets/images/moodista_video.gif" alt="Logo" width="250"/>
 </div>
 
+<br>
 
 ## Front-End
 
@@ -79,6 +86,8 @@ app
 The user authentication system provided by firebase allows users to log in using email and Google login. The user's email information and the data to be searched based on the model's results were stored in the firestore. All the data that the user records on a daily basis is collected and managed using firestore.
 
 To deploy the function and apply it to the app, we used Google cloud function. After using Bert Model to make it lightweight with tflite model, we imported the user's text from firestore and put it as the input of the function, and made it so that the app receives the result in json format. As a result, the app stores the information in firestore and uses it to recommend videos in the future.
+
+<br>
 
 ## AI
 
