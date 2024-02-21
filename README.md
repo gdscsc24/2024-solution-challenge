@@ -37,7 +37,7 @@ samples, guidance on mobile development, and a full API reference.
 - Start debugging in 'main.dart' file
 
 <div align="center">
-  <img src="assets/images/moodista video.gif" alt="Logo" width="250"/>
+  <img src="assets/images/moodista_video.gif" alt="Logo" width="250"/>
 </div>
 
 
