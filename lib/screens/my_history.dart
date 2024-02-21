@@ -1,4 +1,3 @@
-import 'dart:js_interop';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
