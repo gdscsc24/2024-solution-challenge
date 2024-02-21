@@ -44,16 +44,16 @@ samples, guidance on mobile development, and a full API reference.
 ## Front-End
 
 ### Tech Stack
-- Flutter : 3.16.9
-- Dart : 3.2.6
-- Google maps flutter : 2.5.3
-- Google sign in : 6.2.1
-- intl: 0.18.1
-- firebase_core: 2.24.2
-- firebase_auth: 4.16.0
-- cloud_firestore: 4.14.0
+- flutter : 3.16.9
+- dart : 3.2.6
+- google maps flutter : 2.5.3
+- google sign in : 6.2.1
+- intl : 0.18.1
+- firebase_core : 2.24.2
+- firebase_auth : 4.16.0
+- cloud_firestore : 4.14.0
 
-### Architecture
+### Hierarchy
 
 ```
 app
@@ -64,7 +64,7 @@ app
 │ ├── constants
 │ ├── models
 │ ├── providers
-│ └── screens
+│ ├── screens
 │ ├── auth
 │ ├── diary
 │ ├── likes
@@ -81,6 +81,23 @@ The user authentication system provided by firebase allows users to log in using
 To deploy the function and apply it to the app, we used Google cloud function. After using Bert Model to make it lightweight with tflite model, we imported the user's text from firestore and put it as the input of the function, and made it so that the app receives the result in json format. As a result, the app stores the information in firestore and uses it to recommend videos in the future.
 
 ## AI
+
+### Tech Stack
+- transformers : 4.35.2
+- tensorflow : 2.15.0
+- mediapipe-model-maker : 0.2.1.3
+
+### Hierarchy
+
+```
+ai
+├── dataset
+│ ├── train.csv
+│ └── validation.csv
+├── model
+│ └── mobilebert.tflite
+└── mobilebert.py            # Main code
+```
 
 ### Model Architecture
 
