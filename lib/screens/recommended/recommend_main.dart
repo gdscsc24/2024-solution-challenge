@@ -152,6 +152,35 @@ class _RecommendedMainState extends State<RecommendedMain> {
     }
   }
 
+  Future<void> toggleLike(String title) async {
+    final String userEmail = FirebaseAuth.instance.currentUser?.email ?? '';
+    final String formattedDate =
+        DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+    if (userEmail.isEmpty) {
+      print('No user email found');
+      return;
+    }
+
+    final DocumentReference likeRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userEmail)
+        .collection('datas')
+        .doc(formattedDate)
+        .collection('like')
+        .doc(title); // contentId 대신 title 사용
+
+    final DocumentSnapshot likeDoc = await likeRef.get();
+
+    if (likeDoc.exists) {
+      // 이미 '좋아요'를 누른 경우, 제거
+      await likeRef.delete();
+    } else {
+      // '좋아요'가 없는 경우, 추가
+      await likeRef.set({'liked': true});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -510,6 +539,8 @@ class _RecommendedMainState extends State<RecommendedMain> {
               ),
               IconButton(
                 onPressed: () {
+                  final String title = productList.title; // 제품의 title 가져오기
+                  toggleLike(title);
                   setState(() {
                     heartStatusList[index - 1] = !heartStatusList[index - 1];
                   });
