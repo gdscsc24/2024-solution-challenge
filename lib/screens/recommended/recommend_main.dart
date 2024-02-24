@@ -66,14 +66,14 @@ class _RecommendedMainState extends State<RecommendedMain> {
   late List<bool> heartStatusList;
   bool pressed = false;
 
-  String activeButton = 'video';
+  String activeButton = 'activity';
 
-  bool activityPage = false;
+  bool activityPage = true;
 
   @override
   void initState() {
     super.initState();
-    _loadProductList('assets/lists.json');
+    _loadProductList('assets/activity.json');
   }
 
   @override
@@ -287,24 +287,64 @@ class _RecommendedMainState extends State<RecommendedMain> {
         child: Text('No products available'),
       );
     } else {
-      return ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: (productList.length + 1) ~/ 2,
-        itemBuilder: (context, rowIndex) {
-          return Row(
-            children: [
-              ChangeNotifierProvider<ProductModel>.value(
-                value: productList[rowIndex * 2],
-                child: _activitypostCard(context),
-              ),
-              if ((rowIndex * 2 + 1) < productList.length)
-                ChangeNotifierProvider<ProductModel>.value(
-                  value: productList[rowIndex * 2 + 1],
-                  child: _activitypostCard(context),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Column(
+              children: [
+                Text(
+                  'Take action right now!',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22.16,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    height: 2,
+                  ),
                 ),
-            ],
-          );
-        },
+                Text(
+                  'special recipes to make you feel happy ',
+                  style: TextStyle(
+                    color: Color(0xFF757575),
+                    fontSize: 12.16,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w400,
+                    height: 2,
+                  ),
+                ),
+                SizedBox(height: 15)
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: (productList.length + 1) ~/
+                  2, // 한 줄에 두 개의 아이템을 표시하기 위해 itemCount를 조정합니다.
+              itemBuilder: (context, rowIndex) {
+                return Row(
+                  children: [
+                    // 첫 번째 아이템일 경우 CoffeeUpgrade 위젯을 반환합니다.
+                    ChangeNotifierProvider<ProductModel>.value(
+                      value: productList[
+                          rowIndex * 2], // rowIndex에 맞는 인덱스를 계산하여 제품을 가져옵니다.
+                      child: _activitypostCard(context),
+                    ),
+                    // 두 번째 아이템일 경우, 리스트의 끝을 넘어가지 않도록 체크합니다.
+                    if ((rowIndex * 2 + 1) < productList.length)
+                      ChangeNotifierProvider<ProductModel>.value(
+                        value: productList[rowIndex * 2 +
+                            1], // rowIndex에 맞는 인덱스를 계산하여 제품을 가져옵니다.
+                        child: _activitypostCard(context),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       );
     }
   }
@@ -485,31 +525,13 @@ class _RecommendedMainState extends State<RecommendedMain> {
   }
 
   Widget _activitybuildProductDetails(
-      BuildContext context, ProductModel product) {
-    Size screenSize = MediaQuery.of(context).size;
-    // 필요한 경우 product가 null인지 확인할 수 있습니다.
-    return Consumer<ProductModel>(
-      builder: (context, product, child) {
-        // product를 사용하여 UI를 빌드합니다.
-        return Padding(
-          padding: EdgeInsets.fromLTRB(screenSize.width * 0.01, 0, 0, 0),
-          child: Container(
-            width: screenSize.width * 0.35,
-            height: screenSize.width * 0.03,
-            child: Text(
-              product.title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w500,
-                fontSize: 11,
-                color: Color(0xFFFFFFFF),
-              ),
-            ),
-          ),
-        );
-      },
+      BuildContext context, ProductModel productList) {
+    double height = MediaQuery.of(context).size.width * 0.2;
+    return Expanded(
+      child: SizedBox(
+        height: height,
+        child: _activitybuildProductTexts(productList),
+      ),
     );
   }
 
@@ -567,6 +589,28 @@ class _RecommendedMainState extends State<RecommendedMain> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _activitybuildProductTexts(ProductModel productList) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Padding(
+      padding: EdgeInsets.fromLTRB(screenSize.width * 0.01, 0, 0, 0),
+      child: Container(
+        width: screenSize.width * 0.35,
+        height: screenSize.width * 0.03,
+        child: Text(
+          productList.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w500,
+            fontSize: 11,
+            color: Color(0xFFFFFFFF),
+          ),
+        ),
       ),
     );
   }
