@@ -32,7 +32,7 @@ class _IntroSlideState extends State<IntroSlide> {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor: const Color(0xFFFAF1F1),
       body: Padding(
         padding: EdgeInsets.only(top: screenSize.height * 0.23),
         child: PageView.builder(
