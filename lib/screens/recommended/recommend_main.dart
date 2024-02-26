@@ -225,7 +225,7 @@ class _RecommendedMainState extends State<RecommendedMain> {
               ContentButton(
                 buttonText: 'music',
                 onPressed: () {
-                  _loadRecommendedVideosOrFallbackToJson();
+                  _loadProductList('assets/music_lists.json');
                   setState(() {
                     activeButton = 'music'; // 활성 버튼 변경
                     activityPage = false;
