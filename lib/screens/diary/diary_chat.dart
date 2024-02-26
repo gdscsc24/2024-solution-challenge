@@ -108,7 +108,6 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     @override
     Size screenSize = MediaQuery.of(context).size;
 
-    final TextEditingController _textController = TextEditingController();
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
