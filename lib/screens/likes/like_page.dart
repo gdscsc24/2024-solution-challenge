@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:io';
@@ -54,6 +57,57 @@ class _LikesMainState extends State<LikesMain> {
     }
   }
 
+  Future<void> _loadLikedProducts() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final String userEmail = user?.email ?? '';
+    final String formattedDate =
+        DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+    if (userEmail.isEmpty) {
+      print('No user email found');
+      _loadProductList('assets/lists.json');
+      return;
+    }
+
+    try {
+      final QuerySnapshot likedSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userEmail)
+          .collection('datas')
+          .doc(formattedDate)
+          .collection('like')
+          .get();
+
+      if (likedSnapshot.docs.isEmpty) {
+        // _loadProductList('assets/lists.json');
+        return;
+      }
+
+      productList.clear();
+
+      int contentIdCounter = 1; // contentId를 순차적으로 할당하기 위한 카운터
+      for (var doc in likedSnapshot.docs) {
+        final data = doc.data() as Map<String, dynamic>;
+        productList.add(ProductModel(
+          contentId:
+              contentIdCounter, // Firestore에서는 contentId를 별도로 관리하지 않으므로, 순차적인 번호를 할당
+          title: data['title'] as String? ?? 'Default Title',
+          description: data['description'] as String? ?? 'Default Description',
+          imageLink: data['image_link'] as String? ??
+              'https://example.com/default_image.jpg',
+          youtubeLink:
+              data['youtube_link'] as String? ?? 'https://youtube.com/default',
+        ));
+        contentIdCounter++;
+      }
+
+      setState(() {});
+    } catch (e) {
+      print('Error loading recommended videos: $e');
+      _loadProductList('assets/lists.json');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -76,6 +130,7 @@ class _LikesMainState extends State<LikesMain> {
                 buttonText: 'activity',
                 onPressed: () {
                   _loadProductList('assets/activity.json');
+                  _loadLikedProducts();
                   setState(() {
                     activeButton = 'activity'; // 활성 버튼 변경
                     activityPage = true;
@@ -88,6 +143,7 @@ class _LikesMainState extends State<LikesMain> {
                 buttonText: 'video',
                 onPressed: () {
                   _loadProductList('assets/lists.json');
+                  _loadLikedProducts();
                   setState(() {
                     activeButton = 'video'; // 활성 버튼 변경
                     activityPage = false;
@@ -100,6 +156,7 @@ class _LikesMainState extends State<LikesMain> {
                 buttonText: 'music',
                 onPressed: () {
                   _loadProductList('assets/music_lists.json');
+                  _loadLikedProducts();
                   setState(() {
                     activeButton = 'music'; // 활성 버튼 변경
                     activityPage = false;
@@ -112,6 +169,7 @@ class _LikesMainState extends State<LikesMain> {
                 buttonText: 'book',
                 onPressed: () {
                   _loadProductList('assets/book_lists.json');
+                  _loadLikedProducts();
                   setState(() {
                     activeButton = 'book'; // 활성 버튼 변경
                     activityPage = false;
