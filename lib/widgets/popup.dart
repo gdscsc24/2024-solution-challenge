@@ -41,7 +41,7 @@ class MyPopup extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                      onPressed: onPressed,
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFD9D9D9),
                         shape: RoundedRectangleBorder(
@@ -74,7 +74,7 @@ class MyPopup extends StatelessWidget {
                         ),
                       )),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: onPressed,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFFB6C4B),
                         shape: RoundedRectangleBorder(
