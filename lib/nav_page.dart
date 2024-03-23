@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:rest_note/nav_bar.dart';
+import 'package:rest_note/screens/diary/diary_main.dart';
 import 'package:rest_note/screens/likes/like_page.dart';
 import 'package:rest_note/screens/location/location_main.dart';
 import 'package:rest_note/screens/recommended/recommend_main.dart';
@@ -18,7 +19,7 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _bodyPage = <Widget>[
     LocationPage(),
-    RecommendedMain(),
+    DiaryMainPage(),
     LikesMain(),
   ];
 
