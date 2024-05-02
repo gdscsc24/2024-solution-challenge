@@ -144,6 +144,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Try.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>abseil.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -160,6 +165,11 @@
 			<false/>
 		</dict>
 		<key>firebase_core.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>flutter_tts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -215,6 +225,11 @@
 			<false/>
 		</dict>
 		<key>permission_handler_apple.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>speech_to_text.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

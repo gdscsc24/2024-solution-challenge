@@ -1,0 +1,82 @@
+[
+    {
+        "Id": 1,
+        "Question": "I felt annoyed by things that usually wouldn't bother me."
+    },
+    {
+        "Id": 2,
+        "Question": "I had no appetite and didn't feel like eating."
+    },
+    {
+        "Id": 3,
+        "Question": "Even help from family or friends did not improve my depressed mood."
+    },
+    {
+        "Id": 4,
+        "Question": "I felt as capable as other people."
+    },
+    {
+        "Id": 5,
+        "Question": "I found it hard to concentrate on anything."
+    },
+    {
+        "Id": 6,
+        "Question": "I felt depressed."
+    },
+    {
+        "Id": 7,
+        "Question": "Everything I did felt difficult."
+    },
+    {
+        "Id": 8,
+        "Question": "The future seemed bleak."
+    },
+    {
+        "Id": 9,
+        "Question": "I felt like my life was a failure."
+    },
+    {
+        "Id": 10,
+        "Question": "I was scared."
+    },
+    {
+        "Id": 11,
+        "Question": "I had trouble sleeping or couldn't sleep."
+    },
+    {
+        "Id": 12,
+        "Question": "I got along relatively well."
+    },
+    {
+        "Id": 13,
+        "Question": "I spoke less than usual, and my speech decreased."
+    },
+    {
+        "Id": 14,
+        "Question": "I felt as if I was alone in the world."
+    },
+    {
+        "Id": 15,
+        "Question": "It seemed like people were treating me coldly."
+    },
+    {
+        "Id": 16,
+        "Question": "I lived without major complaints."
+    },
+    {
+        "Id": 17,
+        "Question": "I suddenly started crying."
+    },
+    {
+        "Id": 18,
+        "Question": "I felt sad."
+    },
+    {
+        "Id": 19,
+        "Question": "It seemed like people disliked me."
+    },
+    {
+        "Id": 20,
+        "Question": "I had no energy to start anything."
+    }
+]

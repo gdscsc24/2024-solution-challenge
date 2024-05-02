@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rest_note/screens/counselor/counselor_main.dart';
 import 'package:rest_note/screens/diary/diary_coffee.dart';
+import 'package:rest_note/screens/diary/stt.dart';
 import 'package:rest_note/screens/my_history.dart';
 import 'package:rest_note/screens/settings/settings_main.dart';
+import 'package:rest_note/screens/test/test_main.dart';
 
 class DiaryMainPage extends StatefulWidget {
   DiaryMainPage({super.key});
@@ -130,10 +132,10 @@ class _DiaryMainPageState extends State<DiaryMainPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CounselorMainPage()),
+                                  builder: (context) => TestMainPage()),
                             );
                           },
-                          icon: Icon(Icons.send_outlined))),
+                          icon: Icon(Icons.list_alt))),
                 ],
               )
             ],
