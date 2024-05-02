@@ -6,7 +6,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   cloud_firestore
   firebase_auth
   firebase_core
+<<<<<<< HEAD
   flutter_tts
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   permission_handler_windows
   url_launcher_windows
 )

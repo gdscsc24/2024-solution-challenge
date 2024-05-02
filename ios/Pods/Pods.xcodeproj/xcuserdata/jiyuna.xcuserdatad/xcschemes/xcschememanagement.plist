@@ -144,11 +144,14 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+<<<<<<< HEAD
 		<key>Try.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 		<key>abseil.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -169,11 +172,14 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+<<<<<<< HEAD
 		<key>flutter_tts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 		<key>gRPC-C++-gRPCCertificates-Cpp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -229,11 +235,14 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+<<<<<<< HEAD
 		<key>speech_to_text.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 		<key>url_launcher_ios-url_launcher_ios_privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>

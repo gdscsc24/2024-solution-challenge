@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:rest_note/screens/counselor/counselor_main.dart';
 import 'package:rest_note/screens/diary/diary_coffee.dart';
 import 'package:rest_note/screens/diary/stt.dart';
 import 'package:rest_note/screens/my_history.dart';
 import 'package:rest_note/screens/settings/settings_main.dart';
 import 'package:rest_note/screens/test/test_main.dart';
+=======
+import 'package:rest_note/screens/diary/diary_coffee.dart';
+import 'package:rest_note/screens/my_history.dart';
+import 'package:rest_note/screens/settings/settings_main.dart';
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 
 class DiaryMainPage extends StatefulWidget {
   DiaryMainPage({super.key});
@@ -88,6 +94,7 @@ class _DiaryMainPageState extends State<DiaryMainPage> {
                 'assets/images/diary_main_cafe.png',
                 width: screenSize.width * 0.74,
               ),
+<<<<<<< HEAD
               SizedBox(height: screenSize.height * 0.03),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -138,6 +145,29 @@ class _DiaryMainPageState extends State<DiaryMainPage> {
                           icon: Icon(Icons.list_alt))),
                 ],
               )
+=======
+              Ink(
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFFAF1F1),
+                    shape: CircleBorder(),
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                      ),
+                    ],
+                  ),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DiaryCoffeePage()),
+                        );
+                      },
+                      icon: Icon(Icons.add)))
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
             ],
           ),
         ));

@@ -4405,6 +4405,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+<<<<<<< HEAD
 			<string>Copyright (c) 2016, Weebly
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -4435,6 +4436,8 @@ THE SOFTWARE.m of source code must retain the above copyright notice, this list 
 		</dict>
 		<dict>
 			<key>FooterText</key>
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 			<string>
                                  Apache License
                            Version 2.0, January 2004
@@ -4750,6 +4753,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+<<<<<<< HEAD
 			<string>MIT License
 
 Copyright (c) 2018 Daniel Lutton
@@ -4779,6 +4783,8 @@ SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 			<string>
                                  Apache License
                            Version 2.0, January 2004
@@ -6212,6 +6218,7 @@ SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+<<<<<<< HEAD
 			<string>BSD 3-Clause License
 
 Copyright (c) 2019, Corner Software Development Corp.
@@ -6248,6 +6255,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 			<string>Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,

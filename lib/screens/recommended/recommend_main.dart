@@ -7,9 +7,12 @@ import 'package:provider/provider.dart';
 import 'dart:io';
 
 import 'package:rest_note/models/product_model.dart';
+<<<<<<< HEAD
 import 'package:rest_note/screens/diary/diary_main.dart';
 import 'package:rest_note/screens/likes/like_page.dart';
 import 'package:rest_note/screens/location/location_main.dart';
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 import 'package:rest_note/screens/recommended/content_detail.dart';
 import 'package:rest_note/widgets/back_appbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -187,6 +190,7 @@ class _RecommendedMainState extends State<RecommendedMain> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+<<<<<<< HEAD
 
     int currentTabIndex = 1;
 
@@ -195,6 +199,8 @@ class _RecommendedMainState extends State<RecommendedMain> {
       DiaryMainPage(),
       LikesMain(),
     ];
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight * 2),

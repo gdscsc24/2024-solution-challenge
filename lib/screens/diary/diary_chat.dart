@@ -8,7 +8,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:rest_note/constants/event_text.dart';
 import 'package:rest_note/constants/event_color.dart';
+<<<<<<< HEAD
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 
 class DiaryChatPage extends StatefulWidget {
   DiaryChatPage({super.key});
@@ -21,10 +24,13 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
 
   int index = 0;
   bool chat = false;
+<<<<<<< HEAD
 
   stt.SpeechToText _speech = stt.SpeechToText();
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   Future<void> _saveTextToFirestore() async {
     String text =
         _textController.text.isEmpty ? "Plain text" : _textController.text;
@@ -60,6 +66,7 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     });
   }
 
+<<<<<<< HEAD
   void _listen() async {
     if (!_isListening) {
       bool available = await _speech.initialize(
@@ -80,6 +87,8 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
     }
   }
 
+=======
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -170,8 +179,31 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
           padding: EdgeInsets.only(left: screenSize.width * 0.31),
           child: Container(
             width: screenSize.width * 0.63,
+<<<<<<< HEAD
             child: Text(
               _text,
+=======
+            child: TextField(
+              controller: _textController,
+              decoration: InputDecoration(
+                filled: true, // 배경색 적용
+                fillColor: Color(0xFFFFFBF2), // 배경색 지정
+                hintText: 'Write here...',
+                hintStyle: const TextStyle(
+                  fontFamily: 'Rubik',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF403E39),
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                border: OutlineInputBorder(
+                  borderRadius:
+                      BorderRadius.circular(10.0), // 텍스트 필드의 모서리 둥글기 설정
+                  borderSide: BorderSide.none, // 테두리 제거
+                ),
+              ),
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
               style: const TextStyle(
                 fontFamily: 'Rubik',
                 fontSize: 12,
@@ -187,6 +219,7 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
         ),
         SizedBox(height: screenSize.height * 0.01),
         Row(children: [
+<<<<<<< HEAD
           SizedBox(width: screenSize.width * 0.44),
           ElevatedButton.icon(
             onPressed: _listen,
@@ -202,6 +235,9 @@ class _DiaryChatPageState extends State<DiaryChatPage> {
               ),
             ),
           ),
+=======
+          SizedBox(width: screenSize.width * 0.74),
+>>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
           ChatButton(
             text: 'Done',
             onPressed: () {
