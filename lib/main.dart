@@ -5,6 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rest_note/screens/auth/splash_screen.dart';
 import 'package:rest_note/screens/auth/auth_complete.dart'; // AuthCompletePage 임포트
 
+import 'package:rest_note/screens/auth/splash_screen.dart';
+import 'dart:io';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

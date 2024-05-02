@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rest_note/nav_page.dart';
 import 'package:rest_note/screens/auth/intro_slide.dart';
 import 'package:rest_note/screens/auth/auth_complete.dart'; // AuthCompletePage 임포트
 import 'dart:async';
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToHome() {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => DiaryMainPage()),
+      MaterialPageRoute(builder: (context) => MainPage()),
     );
   }
 

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rest_note/nav_page.dart';
-
-import 'package:rest_note/screens/diary/diary_main.dart';
 import 'package:rest_note/screens/recommended/recommend_main.dart';
-
 import 'package:rest_note/widgets/submit_button.dart';
 
 class DiaryFinishPage extends StatefulWidget {
@@ -44,7 +41,7 @@ class _DiaryFinishPageState extends State<DiaryFinishPage> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => MainPage()),
+                MaterialPageRoute(builder: (context) => RecommendedMain()),
               );
             },
             buttonText: "Check my new recipe",
