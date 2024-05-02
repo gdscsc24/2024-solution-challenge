@@ -697,11 +697,8 @@ PODS:
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseSharedSwift (10.21.0)
   - Flutter (1.0.0)
-<<<<<<< HEAD
   - flutter_tts (0.0.1):
     - Flutter
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   - google_maps_flutter_ios (0.0.1):
     - Flutter
     - GoogleMaps (< 9.0)
@@ -811,13 +808,10 @@ PODS:
     - Flutter
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
-<<<<<<< HEAD
   - speech_to_text (0.0.1):
     - Flutter
     - Try
   - Try (2.1.1)
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   - url_launcher_ios (0.0.1):
     - Flutter
 
@@ -826,19 +820,13 @@ DEPENDENCIES:
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
-<<<<<<< HEAD
   - flutter_tts (from `.symlinks/plugins/flutter_tts/ios`)
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - GooglePlaces
   - location (from `.symlinks/plugins/location/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
-<<<<<<< HEAD
   - speech_to_text (from `.symlinks/plugins/speech_to_text/ios`)
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -867,10 +855,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - RecaptchaInterop
-<<<<<<< HEAD
     - Try
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -881,11 +866,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
     :path: Flutter
-<<<<<<< HEAD
   flutter_tts:
     :path: ".symlinks/plugins/flutter_tts/ios"
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   google_maps_flutter_ios:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
   google_sign_in_ios:
@@ -894,11 +876,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/location/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
-<<<<<<< HEAD
   speech_to_text:
     :path: ".symlinks/plugins/speech_to_text/ios"
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -919,10 +898,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreInternal: 7ac1e0c5b4e75aeb898dfe4b1d6d77abbac9eca3
   FirebaseSharedSwift: 19b3f709993d6fa1d84941d41c01e3c4c11eab93
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-<<<<<<< HEAD
   flutter_tts: 0f492aab6accf87059b72354fcb4ba934304771d
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   google_maps_flutter_ios: f135b968a67c05679e0a53538e900b5c174b0d99
   google_sign_in_ios: 1bfaf6607b44cd1b24c4d4bc39719870440f9ce1
   GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
@@ -939,11 +915,8 @@ SPEC CHECKSUMS:
   permission_handler_apple: 036b856153a2b1f61f21030ff725f3e6fece2b78
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-<<<<<<< HEAD
   speech_to_text: b43a7d99aef037bd758ed8e45d79bbac035d2dfe
   Try: 5ef669ae832617b3cee58cb2c6f99fb767a4ff96
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   url_launcher_ios: bbd758c6e7f9fd7b5b1d4cde34d2b95fcce5e812
 
 PODFILE CHECKSUM: 1cab3bde4e8c663f8e22e322a7c9ed6624ca2400

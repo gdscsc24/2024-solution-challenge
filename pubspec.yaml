@@ -33,16 +33,10 @@ dependencies:
   provider: ^6.0.5
   permission_handler: ^11.2.1
   fl_chart: ^0.66.2
-<<<<<<< HEAD
 
   
   url_launcher : ^6.2.4
 
-=======
-  
-  url_launcher : ^6.2.4
-
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   intl: ^0.18.1
   google_sign_in: 6.2.1
   location : ^5.0.3
@@ -55,16 +49,13 @@ dependencies:
   cloud_firestore: ^4.14.0
   google_maps_flutter: ^2.5.3
   google_maps_flutter_web: ^0.5.4+3
-<<<<<<< HEAD
   speech_to_text: ^6.1.1
   flutter_tts: ^3.6.3
 
   google_maps_webservice : ^0.0.19
   http: ^0.13.6
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 
-  google_maps_webservice : ^0.0.19
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -95,10 +86,7 @@ flutter:
     - assets/book_lists.json
     - assets/music_lists.json
     - assets/activity.json
-<<<<<<< HEAD
     - assets/test.json
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
     
   #   - images/a_dot_ham.jpeg
 

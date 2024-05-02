@@ -24,15 +24,12 @@
 @import firebase_core;
 #endif
 
-<<<<<<< HEAD
 #if __has_include(<flutter_tts/FlutterTtsPlugin.h>)
 #import <flutter_tts/FlutterTtsPlugin.h>
 #else
 @import flutter_tts;
 #endif
 
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 #if __has_include(<google_maps_flutter_ios/FLTGoogleMapsPlugin.h>)
 #import <google_maps_flutter_ios/FLTGoogleMapsPlugin.h>
 #else
@@ -57,15 +54,12 @@
 @import permission_handler_apple;
 #endif
 
-<<<<<<< HEAD
 #if __has_include(<speech_to_text/SpeechToTextPlugin.h>)
 #import <speech_to_text/SpeechToTextPlugin.h>
 #else
 @import speech_to_text;
 #endif
 
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 #if __has_include(<url_launcher_ios/URLLauncherPlugin.h>)
 #import <url_launcher_ios/URLLauncherPlugin.h>
 #else
@@ -78,18 +72,12 @@
   [FLTFirebaseFirestorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseFirestorePlugin"]];
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
-<<<<<<< HEAD
   [FlutterTtsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTtsPlugin"]];
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   [FLTGoogleMapsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleMapsPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];
   [PermissionHandlerPlugin registerWithRegistrar:[registry registrarForPlugin:@"PermissionHandlerPlugin"]];
-<<<<<<< HEAD
   [SpeechToTextPlugin registerWithRegistrar:[registry registrarForPlugin:@"SpeechToTextPlugin"]];
-=======
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
   [URLLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"URLLauncherPlugin"]];
 }
 

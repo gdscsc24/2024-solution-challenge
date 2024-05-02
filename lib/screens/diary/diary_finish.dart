@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rest_note/nav_page.dart';
-<<<<<<< HEAD
 import 'package:rest_note/screens/recommended/recommend_main.dart';
-=======
-
-import 'package:rest_note/screens/diary/diary_main.dart';
-import 'package:rest_note/screens/recommended/recommend_main.dart';
-
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
 import 'package:rest_note/widgets/submit_button.dart';
 
 class DiaryFinishPage extends StatefulWidget {
@@ -48,11 +41,7 @@ class _DiaryFinishPageState extends State<DiaryFinishPage> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-<<<<<<< HEAD
                 MaterialPageRoute(builder: (context) => RecommendedMain()),
-=======
-                MaterialPageRoute(builder: (context) => MainPage()),
->>>>>>> db1b6cdb24cc6e7f05e240b78190ebf0c883a982
               );
             },
             buttonText: "Check my new recipe",
