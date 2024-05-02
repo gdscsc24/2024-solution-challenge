@@ -57,47 +57,6 @@ class _LocationPageState extends State<LocationPage> {
     }
   }
 
-  Future<void> checkAndEnableLocationService() async {
-    var status = await Permission.location.status;
-    if (!status.isGranted) {
-      status = await Permission.location.request();
-      if (!status.isGranted) {
-        return;
-      }
-    }
-
-    location.Location locationService = location.Location();
-    bool serviceEnabled = await locationService.serviceEnabled();
-    if (!serviceEnabled) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Location Service Disabled'),
-          content: Text('Please enable location service to use this feature.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () async {
-                Navigator.of(context).pop();
-                bool serviceEnabled = await locationService.requestService();
-                if (!serviceEnabled) {
-                  // 위치 서비스 활성화를 거부한 경우 처리
-                }
-              },
-              child: Text('Enable'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                // 사용자가 위치 서비스 활성화를 거부한 경우 처리
-              },
-              child: Text('Cancel'),
-            ),
-          ],
-        ),
-      );
-    }
-  }
-
   Future<void> _getCurrentLocation() async {
     try {
       var locationService = location.Location();
@@ -122,7 +81,8 @@ class _LocationPageState extends State<LocationPage> {
 
   Future<void> _getNearbyTreatmentCenters(LatLng location) async {
     final places.GoogleMapsPlaces _places = places.GoogleMapsPlaces(
-      apiKey: "AIzaSyBPTQDLzQKbxM_mO2fnxpPMiuZk2naY6Qw",
+      apiKey:
+          "AIzaSyBPTQDLzQKbxM_mO2fnxpPMiuZk2naY6Qw", // Use your actual API key
     );
 
     final places.PlacesSearchResponse response =
@@ -159,25 +119,33 @@ class _LocationPageState extends State<LocationPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(children: [
-        BackAppBar(text: 'Treatment Centers'),
-        _currentLocation == null
-            ? Column(
-                children: [
-                  SizedBox(height: screenSize.height * 0.3),
-                  Center(child: CircularProgressIndicator()),
-                ],
-              )
-            : GoogleMap(
-                onMapCreated: _onMapCreated,
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(_currentLocation!.latitude!,
-                      _currentLocation!.longitude!),
-                  zoom: 15.0,
+      body: Column(
+        children: [
+          BackAppBar(text: 'Treatment Centers'),
+          _currentLocation == null
+              ? Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 20),
+                      Text("Loading current location..."),
+                    ],
+                  ),
+                )
+              : Expanded(
+                  child: GoogleMap(
+                    onMapCreated: _onMapCreated,
+                    initialCameraPosition: CameraPosition(
+                      target: LatLng(_currentLocation!.latitude!,
+                          _currentLocation!.longitude!),
+                      zoom: 15.0,
+                    ),
+                    markers: Set<Marker>.of(_markers),
+                  ),
                 ),
-                markers: Set<Marker>.of(_markers),
-              ),
-      ]),
+        ],
+      ),
     );
   }
 
