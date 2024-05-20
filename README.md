@@ -1,4 +1,7 @@
 # 2024 Solution Challenge : Moodista ☕️
+🏆 **2024 Solution Challenge Top100 awarded**
+
+🏆 **2024 AI 4 Good Hackathon Social Impact Prize**
 
 > GDSC GIST
 >
