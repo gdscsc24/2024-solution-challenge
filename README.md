@@ -122,6 +122,7 @@ ai
 ### Model Architecture
 
 Moodista employs MobileBERT, a lightweight version of the BERT model optimized for mobile devices, for text sentiment classification. We utilize MediaPipe Model Maker to customize the model, tailoring it to our specific data and applications.
+
 ![대체 텍스트](./assets/images/아키텍처.png)
 
 ### Dataset
